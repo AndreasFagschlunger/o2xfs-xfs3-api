@@ -1,29 +1,33 @@
 package at.o2xfs.xfs.v3.cdm;
 
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import at.o2xfs.xfs.v3.cdm.Retract3;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import java.util.Optional;
 
-@MemoryPropertyOrder({"number", "retractArea", "outputPosition" })
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.win32.UShort;
+
+@MemoryPropertyOrder({ "number", "retractArea", "outputPosition" })
 public class Itemposition3 {
 
 	public static class Builder {
 
 		private int number;
-		private Retract3 retractArea;
+		private Optional<Retract3> retractArea;
 		private int outputPosition;
 
-		public Builder() { }
+		public Builder() {
+			retractArea = Optional.empty();
+		}
 
 		public Builder number(int number) {
 			this.number = number;
 			return this;
 		}
 
-		public Builder retractArea(Retract3 retractArea) {
+		public Builder retractArea(Optional<Retract3> retractArea) {
 			this.retractArea = retractArea;
 			return this;
 		}
@@ -41,7 +45,7 @@ public class Itemposition3 {
 	@UShort
 	private final int number;
 
-	private final Retract3 retractArea;
+	private final Optional<Retract3> retractArea;
 
 	@UShort
 	private final int outputPosition;
@@ -56,7 +60,7 @@ public class Itemposition3 {
 		return number;
 	}
 
-	public Retract3 getRetractArea() {
+	public Optional<Retract3> getRetractArea() {
 		return retractArea;
 	}
 
@@ -64,19 +68,24 @@ public class Itemposition3 {
 		return outputPosition;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Itemposition3) {
+		if (obj instanceof Itemposition3) {
 			Itemposition3 itemposition = (Itemposition3) obj;
-			return new EqualsBuilder().append(number, itemposition.number).append(retractArea, itemposition.retractArea).append(outputPosition, itemposition.outputPosition).isEquals();
+			return new EqualsBuilder().append(number, itemposition.number).append(retractArea, itemposition.retractArea)
+					.append(outputPosition, itemposition.outputPosition).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(number).append(retractArea).append(outputPosition).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("number", number).append("retractArea", retractArea).append("outputPosition", outputPosition).toString();
+		return new ToStringBuilder(this).append("number", number).append("retractArea", retractArea)
+				.append("outputPosition", outputPosition).toString();
 	}
 }

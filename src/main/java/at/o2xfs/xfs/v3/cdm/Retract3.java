@@ -1,13 +1,15 @@
 package at.o2xfs.xfs.v3.cdm;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import at.o2xfs.xfs.cdm.RetractArea;
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 
-@MemoryPropertyOrder({"outputPosition", "retractArea", "index" })
+@MemoryPropertyOrder({ "outputPosition", "retractArea", "index" })
 public class Retract3 {
 
 	public static class Builder {
@@ -16,7 +18,8 @@ public class Retract3 {
 		private RetractArea retractArea;
 		private int index;
 
-		public Builder() { }
+		public Builder() {
+		}
 
 		public Builder outputPosition(int outputPosition) {
 			this.outputPosition = outputPosition;
@@ -41,7 +44,7 @@ public class Retract3 {
 	@UShort
 	private final int outputPosition;
 
-	@UShort
+	@XfsEnum16
 	private final RetractArea retractArea;
 
 	@UShort
@@ -65,19 +68,24 @@ public class Retract3 {
 		return index;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Retract3) {
+		if (obj instanceof Retract3) {
 			Retract3 retract = (Retract3) obj;
-			return new EqualsBuilder().append(outputPosition, retract.outputPosition).append(retractArea, retract.retractArea).append(index, retract.index).isEquals();
+			return new EqualsBuilder().append(outputPosition, retract.outputPosition)
+					.append(retractArea, retract.retractArea).append(index, retract.index).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(outputPosition).append(retractArea).append(index).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("outputPosition", outputPosition).append("retractArea", retractArea).append("index", index).toString();
+		return new ToStringBuilder(this).append("outputPosition", outputPosition).append("retractArea", retractArea)
+				.append("index", index).toString();
 	}
 }
