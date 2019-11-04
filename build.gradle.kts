@@ -53,6 +53,8 @@ repositories {
 dependencies {
     api("at.o2xfs:o2xfs-xfs-api:1.0-SNAPSHOT")    
     api("org.apache.commons:commons-lang3:3.9")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.10.0.pr3")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.10.0.pr3")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.2")
 }
