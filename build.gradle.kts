@@ -36,6 +36,8 @@ version = "1.0-SNAPSHOT"
 java {
     sourceCompatibility = JavaVersion.VERSION_1_8
     targetCompatibility = JavaVersion.VERSION_1_8
+    withJavadocJar()
+    withSourcesJar()
 }
 
 repositories {
@@ -53,8 +55,6 @@ repositories {
 dependencies {
     api("at.o2xfs:o2xfs-xfs-api:1.0-SNAPSHOT")    
     api("org.apache.commons:commons-lang3:3.9")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.10.0.pr3")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.10.0.pr3")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.5.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.5.2")
 }
@@ -63,23 +63,10 @@ tasks.named<Test>("test") {
     useJUnitPlatform()
 }
 
-tasks.register<Jar>("sourcesJar") {
-    archiveClassifier.set("sources")
-    from(sourceSets.main.get().allJava)
-}
-
-tasks.register<Jar>("javadocJar") {
-    archiveClassifier.set("javadoc")
-    from(tasks.javadoc.get().destinationDir)
-}
-
 publishing {
     publications {
         create<MavenPublication>("mavenJava") {
             from(components["java"])
-
-            artifact(tasks["sourcesJar"])
-            artifact(tasks["javadocJar"])
         }
     }
 
