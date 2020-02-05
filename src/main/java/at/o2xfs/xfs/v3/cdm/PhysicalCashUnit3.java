@@ -4,10 +4,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
-
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.ULong;
 import at.o2xfs.xfs.cdm.Status;
@@ -16,10 +12,8 @@ import at.o2xfs.xfs.util.UnitId;
 
 @MemoryPropertyOrder({ "physicalPositionName", "unitId", "initialCount", "count", "rejectCount", "maximum", "status",
 		"hardwareSensor" })
-@JsonDeserialize(builder = PhysicalCashUnit3.Builder.class)
 public class PhysicalCashUnit3 {
 
-	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private String physicalPositionName;
@@ -81,7 +75,6 @@ public class PhysicalCashUnit3 {
 
 	private final String physicalPositionName;
 
-	@JsonIgnore
 	private final UnitId unitId;
 
 	@ULong
