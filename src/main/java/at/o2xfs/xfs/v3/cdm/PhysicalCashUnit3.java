@@ -1,16 +1,25 @@
 package at.o2xfs.xfs.v3.cdm;
 
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import at.o2xfs.memory.databind.annotation.win32.ULong;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import at.o2xfs.xfs.util.UnitId;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
-@MemoryPropertyOrder({"physicalPositionName", "unitId", "initialCount", "count", "rejectCount", "maximum", "pStatus", "hardwareSensor" })
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.win32.ULong;
+import at.o2xfs.xfs.cdm.Status;
+import at.o2xfs.xfs.databind.annotation.XfsEnum16;
+import at.o2xfs.xfs.util.UnitId;
+
+@MemoryPropertyOrder({ "physicalPositionName", "unitId", "initialCount", "count", "rejectCount", "maximum", "status",
+		"hardwareSensor" })
+@JsonDeserialize(builder = PhysicalCashUnit3.Builder.class)
 public class PhysicalCashUnit3 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private String physicalPositionName;
@@ -19,10 +28,11 @@ public class PhysicalCashUnit3 {
 		private long count;
 		private long rejectCount;
 		private long maximum;
-		private int pStatus;
+		private Status status;
 		private boolean hardwareSensor;
 
-		public Builder() { }
+		public Builder() {
+		}
 
 		public Builder physicalPositionName(String physicalPositionName) {
 			this.physicalPositionName = physicalPositionName;
@@ -54,8 +64,8 @@ public class PhysicalCashUnit3 {
 			return this;
 		}
 
-		public Builder pStatus(int pStatus) {
-			this.pStatus = pStatus;
+		public Builder status(Status status) {
+			this.status = status;
 			return this;
 		}
 
@@ -71,6 +81,7 @@ public class PhysicalCashUnit3 {
 
 	private final String physicalPositionName;
 
+	@JsonIgnore
 	private final UnitId unitId;
 
 	@ULong
@@ -85,8 +96,8 @@ public class PhysicalCashUnit3 {
 	@ULong
 	private final long maximum;
 
-	@UShort
-	private final int pStatus;
+	@XfsEnum16
+	private final Status status;
 
 	private final boolean hardwareSensor;
 
@@ -97,7 +108,7 @@ public class PhysicalCashUnit3 {
 		count = builder.count;
 		rejectCount = builder.rejectCount;
 		maximum = builder.maximum;
-		pStatus = builder.pStatus;
+		status = builder.status;
 		hardwareSensor = builder.hardwareSensor;
 	}
 
@@ -125,27 +136,38 @@ public class PhysicalCashUnit3 {
 		return maximum;
 	}
 
-	public int getPStatus() {
-		return pStatus;
+	public Status getStatus() {
+		return status;
 	}
 
 	public boolean isHardwareSensor() {
 		return hardwareSensor;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof PhysicalCashUnit3) {
+		if (obj instanceof PhysicalCashUnit3) {
 			PhysicalCashUnit3 physicalCashUnit = (PhysicalCashUnit3) obj;
-			return new EqualsBuilder().append(physicalPositionName, physicalCashUnit.physicalPositionName).append(unitId, physicalCashUnit.unitId).append(initialCount, physicalCashUnit.initialCount).append(count, physicalCashUnit.count).append(rejectCount, physicalCashUnit.rejectCount).append(maximum, physicalCashUnit.maximum).append(pStatus, physicalCashUnit.pStatus).append(hardwareSensor, physicalCashUnit.hardwareSensor).isEquals();
+			return new EqualsBuilder().append(physicalPositionName, physicalCashUnit.physicalPositionName)
+					.append(unitId, physicalCashUnit.unitId).append(initialCount, physicalCashUnit.initialCount)
+					.append(count, physicalCashUnit.count).append(rejectCount, physicalCashUnit.rejectCount)
+					.append(maximum, physicalCashUnit.maximum).append(status, physicalCashUnit.status)
+					.append(hardwareSensor, physicalCashUnit.hardwareSensor).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(physicalPositionName).append(unitId).append(initialCount).append(count).append(rejectCount).append(maximum).append(pStatus).append(hardwareSensor).toHashCode();
+		return new HashCodeBuilder().append(physicalPositionName).append(unitId).append(initialCount).append(count)
+				.append(rejectCount).append(maximum).append(status).append(hardwareSensor).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("physicalPositionName", physicalPositionName).append("unitId", unitId).append("initialCount", initialCount).append("count", count).append("rejectCount", rejectCount).append("maximum", maximum).append("pStatus", pStatus).append("hardwareSensor", hardwareSensor).toString();
+		return new ToStringBuilder(this).append("physicalPositionName", physicalPositionName).append("unitId", unitId)
+				.append("initialCount", initialCount).append("count", count).append("rejectCount", rejectCount)
+				.append("maximum", maximum).append("status", status).append("hardwareSensor", hardwareSensor)
+				.toString();
 	}
 }

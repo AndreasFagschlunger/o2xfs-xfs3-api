@@ -249,12 +249,12 @@ public class Capabilities310 extends Capabilities3 {
 			return this;
 		}
 
-		public Builder addGuidLight(Set<GuidLight> element) {
+		public Builder addGuidLights(Set<GuidLight> element) {
 			this.guidLights.add(element);
 			return this;
 		}
 
-		public Builder addGuidLight(Set<GuidLight>... elements) {
+		public Builder addGuidLights(Set<GuidLight>... elements) {
 			for (Set<GuidLight> each : elements) {
 				this.guidLights.add(each);
 			}
