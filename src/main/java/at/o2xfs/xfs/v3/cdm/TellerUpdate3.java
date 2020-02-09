@@ -1,24 +1,25 @@
 package at.o2xfs.xfs.v3.cdm;
 
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import at.o2xfs.xfs.cdm.Action;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import at.o2xfs.xfs.v3.cdm.TellerDetails3;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
-@MemoryPropertyOrder({"action", "tellerDetails" })
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.xfs.cdm.TellerUpdateAction;
+import at.o2xfs.xfs.databind.annotation.XfsEnum16;
+
+@MemoryPropertyOrder({ "action", "tellerDetails" })
 public class TellerUpdate3 {
 
 	public static class Builder {
 
-		private Action action;
+		private TellerUpdateAction action;
 		private TellerDetails3 tellerDetails;
 
-		public Builder() { }
+		public Builder() {
+		}
 
-		public Builder action(Action action) {
+		public Builder action(TellerUpdateAction action) {
 			this.action = action;
 			return this;
 		}
@@ -33,8 +34,8 @@ public class TellerUpdate3 {
 		}
 	}
 
-	@UShort
-	private final Action action;
+	@XfsEnum16
+	private final TellerUpdateAction action;
 
 	private final TellerDetails3 tellerDetails;
 
@@ -43,7 +44,7 @@ public class TellerUpdate3 {
 		tellerDetails = builder.tellerDetails;
 	}
 
-	public Action getAction() {
+	public TellerUpdateAction getAction() {
 		return action;
 	}
 
@@ -51,18 +52,22 @@ public class TellerUpdate3 {
 		return tellerDetails;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof TellerUpdate3) {
+		if (obj instanceof TellerUpdate3) {
 			TellerUpdate3 tellerUpdate = (TellerUpdate3) obj;
-			return new EqualsBuilder().append(action, tellerUpdate.action).append(tellerDetails, tellerUpdate.tellerDetails).isEquals();
+			return new EqualsBuilder().append(action, tellerUpdate.action)
+					.append(tellerDetails, tellerUpdate.tellerDetails).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(action).append(tellerDetails).toHashCode();
 	}
 
+	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("action", action).append("tellerDetails", tellerDetails).toString();
 	}

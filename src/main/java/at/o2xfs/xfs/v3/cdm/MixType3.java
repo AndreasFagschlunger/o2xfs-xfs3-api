@@ -1,27 +1,28 @@
 package at.o2xfs.xfs.v3.cdm;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
-import at.o2xfs.xfs.cdm.SubType;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import at.o2xfs.xfs.cdm.MixType;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import at.o2xfs.xfs.cdm.MixNumber;
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 
-@MemoryPropertyOrder({"mixNumber", "mixType", "subType", "name" })
+@MemoryPropertyOrder({ "mixNumber", "mixType", "subType", "name" })
 public class MixType3 {
 
 	public static class Builder {
 
-		private MixNumber mixNumber;
+		private int mixNumber;
 		private MixType mixType;
-		private SubType subType;
+		private int subType;
 		private String name;
 
-		public Builder() { }
+		public Builder() {
+		}
 
-		public Builder mixNumber(MixNumber mixNumber) {
+		public Builder mixNumber(int mixNumber) {
 			this.mixNumber = mixNumber;
 			return this;
 		}
@@ -31,7 +32,7 @@ public class MixType3 {
 			return this;
 		}
 
-		public Builder subType(SubType subType) {
+		public Builder subType(int subType) {
 			this.subType = subType;
 			return this;
 		}
@@ -47,13 +48,13 @@ public class MixType3 {
 	}
 
 	@UShort
-	private final MixNumber mixNumber;
+	private final int mixNumber;
 
-	@UShort
+	@XfsEnum16
 	private final MixType mixType;
 
 	@UShort
-	private final SubType subType;
+	private final int subType;
 
 	private final String name;
 
@@ -64,7 +65,7 @@ public class MixType3 {
 		name = builder.name;
 	}
 
-	public MixNumber getMixNumber() {
+	public int getMixNumber() {
 		return mixNumber;
 	}
 
@@ -72,7 +73,7 @@ public class MixType3 {
 		return mixType;
 	}
 
-	public SubType getSubType() {
+	public int getSubType() {
 		return subType;
 	}
 
@@ -80,19 +81,24 @@ public class MixType3 {
 		return name;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof MixType3) {
-			MixType3 mixType = (MixType3) obj;
-			return new EqualsBuilder().append(mixNumber, mixType.mixNumber).append(mixType, mixType.mixType).append(subType, mixType.subType).append(name, mixType.name).isEquals();
+		if (obj instanceof MixType3) {
+			MixType3 mixType3 = (MixType3) obj;
+			return new EqualsBuilder().append(mixNumber, mixType3.mixNumber).append(mixType, mixType3.mixType)
+					.append(subType, mixType3.subType).append(name, mixType3.name).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(mixNumber).append(mixType).append(subType).append(name).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("mixNumber", mixNumber).append("mixType", mixType).append("subType", subType).append("name", name).toString();
+		return new ToStringBuilder(this).append("mixNumber", mixNumber).append("mixType", mixType)
+				.append("subType", subType).append("name", name).toString();
 	}
 }

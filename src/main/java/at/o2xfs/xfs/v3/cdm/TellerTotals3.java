@@ -1,13 +1,15 @@
 package at.o2xfs.xfs.v3.cdm;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.ULong;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import at.o2xfs.xfs.util.CurrencyId;
-import org.apache.commons.lang3.builder.EqualsBuilder;
 
-@MemoryPropertyOrder({"currencyId", "itemsReceived", "itemsDispensed", "coinsReceived", "coinsDispensed", "cashBoxReceived", "cashBoxDispensed" })
+@MemoryPropertyOrder({ "currencyId", "itemsReceived", "itemsDispensed", "coinsReceived", "coinsDispensed",
+		"cashBoxReceived", "cashBoxDispensed" })
 public class TellerTotals3 {
 
 	public static class Builder {
@@ -20,7 +22,9 @@ public class TellerTotals3 {
 		private long cashBoxReceived;
 		private long cashBoxDispensed;
 
-		public Builder() { }
+		public Builder() {
+			currencyId = CurrencyId.empty();
+		}
 
 		public Builder currencyId(CurrencyId currencyId) {
 			this.currencyId = currencyId;
@@ -120,19 +124,33 @@ public class TellerTotals3 {
 		return cashBoxDispensed;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof TellerTotals3) {
+		if (obj instanceof TellerTotals3) {
 			TellerTotals3 tellerTotals = (TellerTotals3) obj;
-			return new EqualsBuilder().append(currencyId, tellerTotals.currencyId).append(itemsReceived, tellerTotals.itemsReceived).append(itemsDispensed, tellerTotals.itemsDispensed).append(coinsReceived, tellerTotals.coinsReceived).append(coinsDispensed, tellerTotals.coinsDispensed).append(cashBoxReceived, tellerTotals.cashBoxReceived).append(cashBoxDispensed, tellerTotals.cashBoxDispensed).isEquals();
+			return new EqualsBuilder().append(currencyId, tellerTotals.currencyId)
+					.append(itemsReceived, tellerTotals.itemsReceived)
+					.append(itemsDispensed, tellerTotals.itemsDispensed)
+					.append(coinsReceived, tellerTotals.coinsReceived)
+					.append(coinsDispensed, tellerTotals.coinsDispensed)
+					.append(cashBoxReceived, tellerTotals.cashBoxReceived)
+					.append(cashBoxDispensed, tellerTotals.cashBoxDispensed).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(currencyId).append(itemsReceived).append(itemsDispensed).append(coinsReceived).append(coinsDispensed).append(cashBoxReceived).append(cashBoxDispensed).toHashCode();
+		return new HashCodeBuilder().append(currencyId).append(itemsReceived).append(itemsDispensed)
+				.append(coinsReceived).append(coinsDispensed).append(cashBoxReceived).append(cashBoxDispensed)
+				.toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("currencyId", currencyId).append("itemsReceived", itemsReceived).append("itemsDispensed", itemsDispensed).append("coinsReceived", coinsReceived).append("coinsDispensed", coinsDispensed).append("cashBoxReceived", cashBoxReceived).append("cashBoxDispensed", cashBoxDispensed).toString();
+		return new ToStringBuilder(this).append("currencyId", currencyId).append("itemsReceived", itemsReceived)
+				.append("itemsDispensed", itemsDispensed).append("coinsReceived", coinsReceived)
+				.append("coinsDispensed", coinsDispensed).append("cashBoxReceived", cashBoxReceived)
+				.append("cashBoxDispensed", cashBoxDispensed).toString();
 	}
 }

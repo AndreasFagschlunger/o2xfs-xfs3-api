@@ -1,28 +1,24 @@
 package at.o2xfs.xfs.v3.cdm;
 
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
-@MemoryPropertyOrder({"count", "cUNumList" })
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.win32.UShortArray;
+
+@MemoryPropertyOrder({ "count", "cashUnitNumbers" })
 public class CountsChanged3 {
 
 	public static class Builder {
 
-		private int count;
-		private int cUNumList;
+		private int[] cashUnitNumbers;
 
-		public Builder() { }
-
-		public Builder count(int count) {
-			this.count = count;
-			return this;
+		public Builder() {
 		}
 
-		public Builder cUNumList(int cUNumList) {
-			this.cUNumList = cUNumList;
+		public Builder cashUnitNumbers(int... cashUnitNumbers) {
+			this.cashUnitNumbers = cashUnitNumbers.clone();
 			return this;
 		}
 
@@ -31,38 +27,33 @@ public class CountsChanged3 {
 		}
 	}
 
-	@UShort
-	private final int count;
-
-	@UShort
-	private final int cUNumList;
+	@UShortArray
+	private final int[] cashUnitNumbers;
 
 	protected CountsChanged3(Builder builder) {
-		count = builder.count;
-		cUNumList = builder.cUNumList;
+		cashUnitNumbers = builder.cashUnitNumbers;
 	}
 
-	public int getCount() {
-		return count;
+	public int[] getCashUnitNumbers() {
+		return cashUnitNumbers.clone();
 	}
 
-	public int getCUNumList() {
-		return cUNumList;
-	}
-
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof CountsChanged3) {
+		if (obj instanceof CountsChanged3) {
 			CountsChanged3 countsChanged = (CountsChanged3) obj;
-			return new EqualsBuilder().append(count, countsChanged.count).append(cUNumList, countsChanged.cUNumList).isEquals();
+			return new EqualsBuilder().append(cashUnitNumbers, countsChanged.cashUnitNumbers).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(count).append(cUNumList).toHashCode();
+		return new HashCodeBuilder().append(cashUnitNumbers).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("count", count).append("cUNumList", cUNumList).toString();
+		return new ToStringBuilder(this).append("cashUnitNumbers", cashUnitNumbers).toString();
 	}
 }

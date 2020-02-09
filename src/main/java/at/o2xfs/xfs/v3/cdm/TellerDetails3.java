@@ -1,20 +1,21 @@
 package at.o2xfs.xfs.v3.cdm;
 
-import at.o2xfs.xfs.cdm.OutputPosition;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import at.o2xfs.xfs.databind.annotation.XfsEnum16;
-import at.o2xfs.memory.databind.annotation.win32.ULong;
 import java.util.ArrayList;
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import java.util.List;
-import at.o2xfs.xfs.v3.cdm.TellerTotals3;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import at.o2xfs.xfs.cdm.InputPosition;
 import java.util.Collections;
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import java.util.List;
 
-@MemoryPropertyOrder({"tellerId", "inputPosition", "outputPosition", "tellerTotals" })
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.NullTerminated;
+import at.o2xfs.memory.databind.annotation.win32.UShort;
+import at.o2xfs.xfs.cdm.InputPosition;
+import at.o2xfs.xfs.cdm.OutputPosition;
+import at.o2xfs.xfs.databind.annotation.XfsEnum16;
+
+@MemoryPropertyOrder({ "tellerId", "inputPosition", "outputPosition", "tellerTotals" })
 public class TellerDetails3 {
 
 	public static class Builder {
@@ -22,9 +23,10 @@ public class TellerDetails3 {
 		private int tellerId;
 		private InputPosition inputPosition;
 		private OutputPosition outputPosition;
-		private List<TellerTotals3> tellerTotals = new ArrayList<>();
+		private final List<TellerTotals3> tellerTotals = new ArrayList<>();
 
-		public Builder() { }
+		public Builder() {
+		}
 
 		public Builder tellerId(int tellerId) {
 			this.tellerId = tellerId;
@@ -47,7 +49,7 @@ public class TellerDetails3 {
 		}
 
 		public Builder addTellerTotal(TellerTotals3... elements) {
-			for(TellerTotals3 each : elements) {
+			for (TellerTotals3 each : elements) {
 				this.tellerTotals.add(each);
 			}
 			return this;
@@ -73,12 +75,13 @@ public class TellerDetails3 {
 	@UShort
 	private final int tellerId;
 
-	@ULong
+	@XfsEnum16
 	private final InputPosition inputPosition;
 
 	@XfsEnum16
 	private final OutputPosition outputPosition;
 
+	@NullTerminated
 	private final List<TellerTotals3> tellerTotals;
 
 	protected TellerDetails3(Builder builder) {
@@ -104,19 +107,27 @@ public class TellerDetails3 {
 		return tellerTotals;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof TellerDetails3) {
+		if (obj instanceof TellerDetails3) {
 			TellerDetails3 tellerDetails = (TellerDetails3) obj;
-			return new EqualsBuilder().append(tellerId, tellerDetails.tellerId).append(inputPosition, tellerDetails.inputPosition).append(outputPosition, tellerDetails.outputPosition).append(tellerTotals, tellerDetails.tellerTotals).isEquals();
+			return new EqualsBuilder().append(tellerId, tellerDetails.tellerId)
+					.append(inputPosition, tellerDetails.inputPosition)
+					.append(outputPosition, tellerDetails.outputPosition)
+					.append(tellerTotals, tellerDetails.tellerTotals).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(tellerId).append(inputPosition).append(outputPosition).append(tellerTotals).toHashCode();
+		return new HashCodeBuilder().append(tellerId).append(inputPosition).append(outputPosition).append(tellerTotals)
+				.toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("tellerId", tellerId).append("inputPosition", inputPosition).append("outputPosition", outputPosition).append("tellerTotals", tellerTotals).toString();
+		return new ToStringBuilder(this).append("tellerId", tellerId).append("inputPosition", inputPosition)
+				.append("outputPosition", outputPosition).append("tellerTotals", tellerTotals).toString();
 	}
 }

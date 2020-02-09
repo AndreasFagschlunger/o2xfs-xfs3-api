@@ -1,9 +1,7 @@
-package at.o2xfs.xfs.v3_10.cdm;
+package at.o2xfs.xfs.v3_30.cdm;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -13,30 +11,29 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.xfs.XfsServiceClass;
+import at.o2xfs.xfs.cdm.CdmExecuteCommand;
 import at.o2xfs.xfs.cdm.CdmType;
 import at.o2xfs.xfs.cdm.ExchangeType;
 import at.o2xfs.xfs.cdm.GuidLight;
+import at.o2xfs.xfs.cdm.ItemInfoType;
 import at.o2xfs.xfs.cdm.MoveItem;
 import at.o2xfs.xfs.cdm.Position;
 import at.o2xfs.xfs.cdm.RetractArea;
 import at.o2xfs.xfs.cdm.RetractStackerAction;
 import at.o2xfs.xfs.cdm.RetractTransportAction;
-import at.o2xfs.xfs.databind.annotation.XfsGuidLights;
-import at.o2xfs.xfs.v3.cdm.Capabilities3;
+import at.o2xfs.xfs.databind.annotation.XfsEnumSet32;
+import at.o2xfs.xfs.v3_20.cdm.Capabilities320;
 
-@MemoryPropertyOrder({ "guidLights", "powerSaveControl", "prepareDispense" })
-public class Capabilities310 extends Capabilities3 {
+@MemoryPropertyOrder({ "itemInfoTypes", "blacklist", "synchronizableCommands" })
+public class Capabilities330 extends Capabilities320 {
 
-	private static final int GUIDLIGHTS_MAX = 32;
+	public static class Builder extends Capabilities320.Builder {
 
-	public static class Builder extends Capabilities3.Builder {
-
-		private final List<Set<GuidLight>> guidLights;
-		private boolean powerSaveControl;
-		private boolean prepareDispense;
+		private EnumSet<ItemInfoType> itemInfoTypes = EnumSet.noneOf(ItemInfoType.class);
+		private boolean blacklist;
+		private Set<CdmExecuteCommand> synchronizableCommands;
 
 		public Builder() {
-			guidLights = new ArrayList<>();
 		}
 
 		@Override
@@ -249,100 +246,154 @@ public class Capabilities310 extends Capabilities3 {
 			return this;
 		}
 
+		@Override
 		public Builder addGuidLights(Set<GuidLight> element) {
-			this.guidLights.add(element);
-			return this;
-		}
-
-		public Builder addGuidLights(Set<GuidLight>... elements) {
-			for (Set<GuidLight> each : elements) {
-				this.guidLights.add(each);
-			}
-			return this;
-		}
-
-		public Builder guidLights(Iterable<Set<GuidLight>> elements) {
-			this.guidLights.clear();
-			return addAllGuidLights(elements);
-		}
-
-		public Builder addAllGuidLights(Iterable<Set<GuidLight>> elements) {
-			for (Set<GuidLight> each : elements) {
-				this.guidLights.add(each);
-			}
-			return this;
-		}
-
-		public Builder powerSaveControl(boolean powerSaveControl) {
-			this.powerSaveControl = powerSaveControl;
-			return this;
-		}
-
-		public Builder prepareDispense(boolean prepareDispense) {
-			this.prepareDispense = prepareDispense;
+			super.addGuidLights(element);
 			return this;
 		}
 
 		@Override
-		public Capabilities310 build() {
-			return new Capabilities310(this);
+		public Builder addGuidLights(Set<GuidLight>... elements) {
+			super.addGuidLights(elements);
+			return this;
 		}
-	}
 
-	@XfsGuidLights(length = GUIDLIGHTS_MAX)
-	private final List<Set<GuidLight>> guidLights;
+		@Override
+		public Builder guidLights(Iterable<Set<GuidLight>> elements) {
+			super.guidLights(elements);
+			return this;
+		}
 
-	private final boolean powerSaveControl;
+		@Override
+		public Builder addAllGuidLights(Iterable<Set<GuidLight>> elements) {
+			super.addAllGuidLights(elements);
+			return this;
+		}
 
-	private final boolean prepareDispense;
+		@Override
+		public Builder powerSaveControl(boolean powerSaveControl) {
+			super.powerSaveControl(powerSaveControl);
+			return this;
+		}
 
-	protected Capabilities310(Builder builder) {
-		super(builder);
-		List<Set<GuidLight>> guidLights = new ArrayList<>(GUIDLIGHTS_MAX);
-		for (int i = 0; i < GUIDLIGHTS_MAX; i++) {
-			Set<GuidLight> s = EnumSet.noneOf(GuidLight.class);
-			if (i < builder.guidLights.size() && !builder.guidLights.get(i).isEmpty()) {
-				s = EnumSet.copyOf(builder.guidLights.get(i));
+		@Override
+		public Builder prepareDispense(boolean prepareDispense) {
+			super.prepareDispense(prepareDispense);
+			return this;
+		}
+
+		@Override
+		public Builder antiFraudModule(boolean antiFraudModule) {
+			super.antiFraudModule(antiFraudModule);
+			return this;
+		}
+
+		public Builder addItemInfoType(ItemInfoType element) {
+			this.itemInfoTypes.add(element);
+			return this;
+		}
+
+		public Builder addItemInfoType(ItemInfoType... elements) {
+			for (ItemInfoType each : elements) {
+				this.itemInfoTypes.add(each);
 			}
-			guidLights.add(Collections.unmodifiableSet(s));
+			return this;
 		}
-		this.guidLights = Collections.unmodifiableList(guidLights);
-		powerSaveControl = builder.powerSaveControl;
-		prepareDispense = builder.prepareDispense;
+
+		public Builder itemInfoTypes(Iterable<ItemInfoType> elements) {
+			this.itemInfoTypes.clear();
+			return addAllItemInfoTypes(elements);
+		}
+
+		public Builder addAllItemInfoTypes(Iterable<ItemInfoType> elements) {
+			for (ItemInfoType each : elements) {
+				this.itemInfoTypes.add(each);
+			}
+			return this;
+		}
+
+		public Builder blacklist(boolean blacklist) {
+			this.blacklist = blacklist;
+			return this;
+		}
+
+		public Builder addSynchronizableCommands(CdmExecuteCommand synchronizableCommands) {
+			this.synchronizableCommands.add(synchronizableCommands);
+			return this;
+		}
+
+		public Builder addSynchronizableCommands(CdmExecuteCommand... synchronizableCommands) {
+			for (CdmExecuteCommand each : synchronizableCommands) {
+				this.synchronizableCommands.add(each);
+			}
+			return this;
+		}
+
+		public Builder synchronizableCommands(Iterable<CdmExecuteCommand> synchronizableCommands) {
+			this.synchronizableCommands.clear();
+			return addAllSynchronizableCommands(synchronizableCommands);
+		}
+
+		public Builder addAllSynchronizableCommands(Iterable<CdmExecuteCommand> synchronizableCommands) {
+			for (CdmExecuteCommand each : synchronizableCommands) {
+				this.synchronizableCommands.add(each);
+			}
+			return this;
+		}
+
+		@Override
+		public Capabilities330 build() {
+			return new Capabilities330(this);
+		}
 	}
 
-	public List<Set<GuidLight>> getGuidLights() {
-		return guidLights;
+	@XfsEnumSet32
+	private final Set<ItemInfoType> itemInfoTypes;
+
+	private final boolean blacklist;
+
+	@XfsEnumSet32
+	private final Set<CdmExecuteCommand> synchronizableCommands;
+
+	protected Capabilities330(Builder builder) {
+		super(builder);
+		itemInfoTypes = Collections.unmodifiableSet(EnumSet.copyOf(builder.itemInfoTypes));
+		blacklist = builder.blacklist;
+		synchronizableCommands = builder.synchronizableCommands;
 	}
 
-	public boolean isPowerSaveControl() {
-		return powerSaveControl;
+	public Set<ItemInfoType> getItemInfoTypes() {
+		return itemInfoTypes;
 	}
 
-	public boolean isPrepareDispense() {
-		return prepareDispense;
+	public boolean isBlacklist() {
+		return blacklist;
+	}
+
+	public Set<CdmExecuteCommand> getSynchronizableCommands() {
+		return synchronizableCommands;
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof Capabilities310) {
-			Capabilities310 capabilities = (Capabilities310) obj;
-			return new EqualsBuilder().appendSuper(super.equals(obj)).append(guidLights, capabilities.guidLights)
-					.append(powerSaveControl, capabilities.powerSaveControl)
-					.append(prepareDispense, capabilities.prepareDispense).isEquals();
+		if (obj instanceof Capabilities330) {
+			Capabilities330 capabilities = (Capabilities330) obj;
+			return new EqualsBuilder().appendSuper(super.equals(obj)).append(itemInfoTypes, capabilities.itemInfoTypes)
+					.append(blacklist, capabilities.blacklist)
+					.append(synchronizableCommands, capabilities.synchronizableCommands).isEquals();
 		}
 		return false;
 	}
 
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().appendSuper(super.hashCode()).append(guidLights).append(powerSaveControl)
-				.append(prepareDispense).toHashCode();
+		return new HashCodeBuilder().appendSuper(super.hashCode()).append(itemInfoTypes).append(blacklist)
+				.append(synchronizableCommands).toHashCode();
 	}
 
 	@Override
 	public String toString() {
-		return new ToStringBuilder(this).appendSuper(super.toString()).append("guidLights", guidLights)
-				.append("powerSaveControl", powerSaveControl).append("prepareDispense", prepareDispense).toString();
+		return new ToStringBuilder(this).appendSuper(super.toString()).append("itemInfoTypes", itemInfoTypes)
+				.append("blacklist", blacklist).append("synchronizableCommands", synchronizableCommands).toString();
 	}
 }

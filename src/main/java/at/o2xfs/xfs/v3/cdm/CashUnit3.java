@@ -1,21 +1,24 @@
 package at.o2xfs.xfs.v3.cdm;
 
-import at.o2xfs.memory.databind.annotation.win32.UShort;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.ULong;
+import at.o2xfs.memory.databind.annotation.win32.UShort;
+import at.o2xfs.xfs.cdm.Status;
+import at.o2xfs.xfs.cdm.Type;
+import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 import at.o2xfs.xfs.util.CurrencyId;
 import at.o2xfs.xfs.util.UnitId;
-import java.util.ArrayList;
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import java.util.List;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import at.o2xfs.xfs.cdm.Type;
-import java.util.Collections;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import at.o2xfs.xfs.cdm.Status;
-import at.o2xfs.xfs.v3.cdm.PhysicalCashUnit3;
 
-@MemoryPropertyOrder({"number", "type", "cashUnitName", "unitId", "currencyId", "values", "initialCount", "count", "rejectCount", "minimum", "maximum", "appLock", "status", "numPhysicalCUs", "physical" })
+@MemoryPropertyOrder({ "number", "type", "cashUnitName", "unitId", "currencyId", "values", "initialCount", "count",
+		"rejectCount", "minimum", "maximum", "appLock", "status", "numPhysicalCUs", "physical" })
 public class CashUnit3 {
 
 	public static class Builder {
@@ -33,10 +36,12 @@ public class CashUnit3 {
 		private long maximum;
 		private boolean appLock;
 		private Status status;
-		private int numPhysicalCUs;
-		private List<PhysicalCashUnit3> physical = new ArrayList<>();
+		private final List<PhysicalCashUnit3> physical = new ArrayList<>();
 
-		public Builder() { }
+		public Builder() {
+			unitId = UnitId.empty();
+			currencyId = CurrencyId.empty();
+		}
 
 		public Builder number(int number) {
 			this.number = number;
@@ -103,29 +108,24 @@ public class CashUnit3 {
 			return this;
 		}
 
-		public Builder numPhysicalCUs(int numPhysicalCUs) {
-			this.numPhysicalCUs = numPhysicalCUs;
-			return this;
-		}
-
 		public Builder addPhysical(PhysicalCashUnit3 element) {
 			this.physical.add(element);
 			return this;
 		}
 
 		public Builder addPhysical(PhysicalCashUnit3... elements) {
-			for(PhysicalCashUnit3 each : elements) {
+			for (PhysicalCashUnit3 each : elements) {
 				this.physical.add(each);
 			}
 			return this;
 		}
 
-		public Builder physical(Iterable<PhysicalCashUnit3> elements) {
+		public Builder physical(Iterable<? extends PhysicalCashUnit3> elements) {
 			this.physical.clear();
 			return addAllPhysical(elements);
 		}
 
-		public Builder addAllPhysical(Iterable<PhysicalCashUnit3> elements) {
+		public Builder addAllPhysical(Iterable<? extends PhysicalCashUnit3> elements) {
 			for (PhysicalCashUnit3 each : elements) {
 				this.physical.add(each);
 			}
@@ -140,7 +140,7 @@ public class CashUnit3 {
 	@UShort
 	private final int number;
 
-	@UShort
+	@XfsEnum16
 	private final Type type;
 
 	private final String cashUnitName;
@@ -169,11 +169,8 @@ public class CashUnit3 {
 
 	private final boolean appLock;
 
-	@UShort
+	@XfsEnum16
 	private final Status status;
-
-	@UShort
-	private final int numPhysicalCUs;
 
 	private final List<PhysicalCashUnit3> physical;
 
@@ -191,7 +188,6 @@ public class CashUnit3 {
 		maximum = builder.maximum;
 		appLock = builder.appLock;
 		status = builder.status;
-		numPhysicalCUs = builder.numPhysicalCUs;
 		physical = Collections.unmodifiableList(new ArrayList<>(builder.physical));
 	}
 
@@ -247,27 +243,38 @@ public class CashUnit3 {
 		return status;
 	}
 
-	public int getNumPhysicalCUs() {
-		return numPhysicalCUs;
-	}
-
 	public List<PhysicalCashUnit3> getPhysical() {
 		return physical;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof CashUnit3) {
+		if (obj instanceof CashUnit3) {
 			CashUnit3 cashUnit = (CashUnit3) obj;
-			return new EqualsBuilder().append(number, cashUnit.number).append(type, cashUnit.type).append(cashUnitName, cashUnit.cashUnitName).append(unitId, cashUnit.unitId).append(currencyId, cashUnit.currencyId).append(values, cashUnit.values).append(initialCount, cashUnit.initialCount).append(count, cashUnit.count).append(rejectCount, cashUnit.rejectCount).append(minimum, cashUnit.minimum).append(maximum, cashUnit.maximum).append(appLock, cashUnit.appLock).append(status, cashUnit.status).append(numPhysicalCUs, cashUnit.numPhysicalCUs).append(physical, cashUnit.physical).isEquals();
+			return new EqualsBuilder().append(number, cashUnit.number).append(type, cashUnit.type)
+					.append(cashUnitName, cashUnit.cashUnitName).append(unitId, cashUnit.unitId)
+					.append(currencyId, cashUnit.currencyId).append(values, cashUnit.values)
+					.append(initialCount, cashUnit.initialCount).append(count, cashUnit.count)
+					.append(rejectCount, cashUnit.rejectCount).append(minimum, cashUnit.minimum)
+					.append(maximum, cashUnit.maximum).append(appLock, cashUnit.appLock).append(status, cashUnit.status)
+					.append(physical, cashUnit.physical).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(number).append(type).append(cashUnitName).append(unitId).append(currencyId).append(values).append(initialCount).append(count).append(rejectCount).append(minimum).append(maximum).append(appLock).append(status).append(numPhysicalCUs).append(physical).toHashCode();
+		return new HashCodeBuilder().append(number).append(type).append(cashUnitName).append(unitId).append(currencyId)
+				.append(values).append(initialCount).append(count).append(rejectCount).append(minimum).append(maximum)
+				.append(appLock).append(status).append(physical).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("number", number).append("type", type).append("cashUnitName", cashUnitName).append("unitId", unitId).append("currencyId", currencyId).append("values", values).append("initialCount", initialCount).append("count", count).append("rejectCount", rejectCount).append("minimum", minimum).append("maximum", maximum).append("appLock", appLock).append("status", status).append("numPhysicalCUs", numPhysicalCUs).append("physical", physical).toString();
+		return new ToStringBuilder(this).append("number", number).append("type", type)
+				.append("cashUnitName", cashUnitName).append("unitId", unitId).append("currencyId", currencyId)
+				.append("values", values).append("initialCount", initialCount).append("count", count)
+				.append("rejectCount", rejectCount).append("minimum", minimum).append("maximum", maximum)
+				.append("appLock", appLock).append("status", status).append("physical", physical).toString();
 	}
 }

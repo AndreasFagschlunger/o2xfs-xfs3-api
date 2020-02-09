@@ -1,6 +1,5 @@
 package at.o2xfs.xfs.v3_20.cdm;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -241,18 +240,19 @@ public class Capabilities320 extends Capabilities310 {
 		}
 
 		@Override
-		public Builder addGuidLight(Set<GuidLight> element) {
-			super.addGuidLight(element);
+		public Builder addGuidLights(Set<GuidLight> element) {
+			super.addGuidLights(element);
 			return this;
 		}
 
 		@Override
-		public Builder addGuidLight(Set<GuidLight>... elements) {
-			super.addGuidLight(elements);
+		public Builder addGuidLights(Set<GuidLight>... elements) {
+			super.addGuidLights(elements);
 			return this;
 		}
 
-		public Builder guidLights(List<Set<GuidLight>> elements) {
+		@Override
+		public Builder guidLights(Iterable<Set<GuidLight>> elements) {
 			super.guidLights(elements);
 			return this;
 		}
