@@ -15,23 +15,34 @@ public abstract class BaseTest {
 
 	protected final MemoryMapper mapper;
 
+	private final ByteArrayMemorySystem memorySystem;
+
 	public BaseTest() {
 		mapper = new MemoryMapper();
+		memorySystem = new ByteArrayMemorySystem();
 	}
 
 	public abstract Object getValue();
 
 	@Test
-	public void test() throws IOException {
-		Object expected = getValue();
-		ByteArrayMemorySystem memorySystem = new ByteArrayMemorySystem();
-		ReadableMemory memory;
+	public final void deserializedValueShouldBeEqualToExpectedValue() throws IOException {
+		testDeSerializable(getValue());
+	}
+
+	protected ReadableMemory serialize(Object value) throws IOException {
+		ReadableMemory result;
 		try (ByteArrayMemoryGenerator gen = memorySystem.createGenerator()) {
-			mapper.write(gen, expected);
-			memory = memorySystem.dereference(gen.allocate());
+			mapper.write(gen, value);
+			result = memorySystem.dereference(gen.allocate());
 		}
+		return result;
+	}
+
+	protected void testDeSerializable(Object expected) throws IOException {
+		ReadableMemory memory = serialize(expected);
 		System.out.println("memory=" + memory);
 		Object actual = mapper.read(memory, expected.getClass());
+		System.out.println("actual=" + actual);
 		assertEquals(expected, actual);
 	}
 }

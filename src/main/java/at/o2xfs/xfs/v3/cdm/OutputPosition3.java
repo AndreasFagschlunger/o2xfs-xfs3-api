@@ -1,17 +1,18 @@
 package at.o2xfs.xfs.v3.cdm;
 
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import at.o2xfs.xfs.databind.annotation.XfsEnum16;
-import at.o2xfs.xfs.cdm.Transport;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import at.o2xfs.xfs.cdm.TransportStatus;
-import at.o2xfs.xfs.cdm.Shutter;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.xfs.cdm.Position;
 import at.o2xfs.xfs.cdm.PositionStatus;
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import at.o2xfs.xfs.cdm.Shutter;
+import at.o2xfs.xfs.cdm.Transport;
+import at.o2xfs.xfs.cdm.TransportStatus;
+import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 
-@MemoryPropertyOrder({"position", "shutter", "positionStatus", "transport", "transportStatus" })
+@MemoryPropertyOrder({ "position", "shutter", "positionStatus", "transport", "transportStatus" })
 public class OutputPosition3 {
 
 	public static class Builder {
@@ -22,7 +23,13 @@ public class OutputPosition3 {
 		private Transport transport;
 		private TransportStatus transportStatus;
 
-		public Builder() { }
+		public Builder() {
+			position = Position.NULL;
+			shutter = Shutter.CLOSED;
+			positionStatus = PositionStatus.EMPTY;
+			transport = Transport.OK;
+			transportStatus = TransportStatus.EMPTY;
+		}
 
 		public Builder position(Position position) {
 			this.position = position;
@@ -97,19 +104,27 @@ public class OutputPosition3 {
 		return transportStatus;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof OutputPosition3) {
+		if (obj instanceof OutputPosition3) {
 			OutputPosition3 outputPosition = (OutputPosition3) obj;
-			return new EqualsBuilder().append(position, outputPosition.position).append(shutter, outputPosition.shutter).append(positionStatus, outputPosition.positionStatus).append(transport, outputPosition.transport).append(transportStatus, outputPosition.transportStatus).isEquals();
+			return new EqualsBuilder().append(position, outputPosition.position).append(shutter, outputPosition.shutter)
+					.append(positionStatus, outputPosition.positionStatus).append(transport, outputPosition.transport)
+					.append(transportStatus, outputPosition.transportStatus).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(position).append(shutter).append(positionStatus).append(transport).append(transportStatus).toHashCode();
+		return new HashCodeBuilder().append(position).append(shutter).append(positionStatus).append(transport)
+				.append(transportStatus).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("position", position).append("shutter", shutter).append("positionStatus", positionStatus).append("transport", transport).append("transportStatus", transportStatus).toString();
+		return new ToStringBuilder(this).append("position", position).append("shutter", shutter)
+				.append("positionStatus", positionStatus).append("transport", transport)
+				.append("transportStatus", transportStatus).toString();
 	}
 }

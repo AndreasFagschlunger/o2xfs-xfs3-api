@@ -2,6 +2,7 @@ package at.o2xfs.xfs.v3.cdm;
 
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -46,9 +47,10 @@ public class Capabilities3 {
 		private EnumSet<Position> positions = EnumSet.noneOf(Position.class);
 		private EnumSet<MoveItem> moveItems = EnumSet.noneOf(MoveItem.class);
 		private EnumSet<ExchangeType> exchangeType = EnumSet.noneOf(ExchangeType.class);
-		private Map<String, String> extra;
+		private final Map<String, String> extra;
 
 		public Builder() {
+			extra = new LinkedHashMap<>();
 		}
 
 		public Builder serviceClass(XfsServiceClass serviceClass) {
@@ -245,8 +247,21 @@ public class Capabilities3 {
 			return this;
 		}
 
-		public Builder extra(Map<String, String> extra) {
-			this.extra = extra;
+		public Builder putExtra(String key, String value) {
+			extra.put(key, value);
+			return this;
+		}
+
+		public Builder extra(Map<String, String> entries) {
+			extra.clear();
+			putAllExtra(entries);
+			return this;
+		}
+
+		public Builder putAllExtra(Map<String, String> entries) {
+			for (Map.Entry<String, String> e : entries.entrySet()) {
+				extra.put(e.getKey(), e.getValue());
+			}
 			return this;
 		}
 
@@ -316,7 +331,7 @@ public class Capabilities3 {
 		positions = Collections.unmodifiableSet(EnumSet.copyOf(builder.positions));
 		moveItems = Collections.unmodifiableSet(EnumSet.copyOf(builder.moveItems));
 		exchangeType = Collections.unmodifiableSet(EnumSet.copyOf(builder.exchangeType));
-		extra = builder.extra;
+		extra = Collections.unmodifiableMap(new LinkedHashMap<>(builder.extra));
 	}
 
 	public XfsServiceClass getServiceClass() {

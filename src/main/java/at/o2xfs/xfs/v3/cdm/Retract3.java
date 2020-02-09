@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
+import at.o2xfs.xfs.cdm.Position;
 import at.o2xfs.xfs.cdm.RetractArea;
 import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 
@@ -14,14 +15,15 @@ public class Retract3 {
 
 	public static class Builder {
 
-		private int outputPosition;
+		private Position outputPosition;
 		private RetractArea retractArea;
 		private int index;
 
 		public Builder() {
+			outputPosition = Position.NULL;
 		}
 
-		public Builder outputPosition(int outputPosition) {
+		public Builder outputPosition(Position outputPosition) {
 			this.outputPosition = outputPosition;
 			return this;
 		}
@@ -41,8 +43,8 @@ public class Retract3 {
 		}
 	}
 
-	@UShort
-	private final int outputPosition;
+	@XfsEnum16
+	private final Position outputPosition;
 
 	@XfsEnum16
 	private final RetractArea retractArea;
@@ -56,7 +58,7 @@ public class Retract3 {
 		index = builder.index;
 	}
 
-	public int getOutputPosition() {
+	public Position getOutputPosition() {
 		return outputPosition;
 	}
 

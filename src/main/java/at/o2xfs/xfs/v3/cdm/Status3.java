@@ -1,22 +1,24 @@
 package at.o2xfs.xfs.v3.cdm;
 
-import at.o2xfs.xfs.databind.annotation.XfsEnum16;
-import at.o2xfs.xfs.cdm.SafeDoor;
-import at.o2xfs.xfs.cdm.IntermediateStacker;
-import at.o2xfs.xfs.v3.cdm.OutputPosition3;
 import java.util.ArrayList;
-import at.o2xfs.xfs.cdm.Device;
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import java.util.List;
-import at.o2xfs.xfs.cdm.Dispenser;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import java.util.Map;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import java.util.Collections;
-import at.o2xfs.xfs.databind.annotation.XfsExtra;
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
-@MemoryPropertyOrder({"device", "safeDoor", "dispenser", "intermediateStacker", "positions", "extra" })
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.xfs.cdm.Device;
+import at.o2xfs.xfs.cdm.Dispenser;
+import at.o2xfs.xfs.cdm.IntermediateStacker;
+import at.o2xfs.xfs.cdm.SafeDoor;
+import at.o2xfs.xfs.databind.annotation.XfsEnum16;
+import at.o2xfs.xfs.databind.annotation.XfsExtra;
+
+@MemoryPropertyOrder({ "device", "safeDoor", "dispenser", "intermediateStacker", "positions", "extra" })
 public class Status3 {
 
 	public static class Builder {
@@ -25,10 +27,16 @@ public class Status3 {
 		private SafeDoor safeDoor;
 		private Dispenser dispenser;
 		private IntermediateStacker intermediateStacker;
-		private List<OutputPosition3> positions = new ArrayList<>();
-		private Map<String, String> extra;
+		private final List<OutputPosition3> positions;
+		private final Map<String, String> extra;
 
-		public Builder() { }
+		public Builder() {
+			device = Device.ONLINE;
+			dispenser = Dispenser.OK;
+			intermediateStacker = IntermediateStacker.EMPTY;
+			positions = new ArrayList<>();
+			extra = new LinkedHashMap<>();
+		}
 
 		public Builder device(Device device) {
 			this.device = device;
@@ -56,7 +64,7 @@ public class Status3 {
 		}
 
 		public Builder addPosition(OutputPosition3... elements) {
-			for(OutputPosition3 each : elements) {
+			for (OutputPosition3 each : elements) {
 				this.positions.add(each);
 			}
 			return this;
@@ -74,8 +82,21 @@ public class Status3 {
 			return this;
 		}
 
-		public Builder extra(Map<String, String> extra) {
-			this.extra = extra;
+		public Builder putExtra(String key, String value) {
+			extra.put(key, value);
+			return this;
+		}
+
+		public Builder extra(Map<String, String> entries) {
+			extra.clear();
+			putAllExtra(entries);
+			return this;
+		}
+
+		public Builder putAllExtra(Map<String, String> entries) {
+			for (Map.Entry<String, String> e : entries.entrySet()) {
+				extra.put(e.getKey(), e.getValue());
+			}
 			return this;
 		}
 
@@ -107,7 +128,7 @@ public class Status3 {
 		dispenser = builder.dispenser;
 		intermediateStacker = builder.intermediateStacker;
 		positions = Collections.unmodifiableList(new ArrayList<>(builder.positions));
-		extra = builder.extra;
+		extra = Collections.unmodifiableMap(new LinkedHashMap<>(builder.extra));
 	}
 
 	public Device getDevice() {
@@ -134,19 +155,27 @@ public class Status3 {
 		return extra;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Status3) {
+		if (obj instanceof Status3) {
 			Status3 status = (Status3) obj;
-			return new EqualsBuilder().append(device, status.device).append(safeDoor, status.safeDoor).append(dispenser, status.dispenser).append(intermediateStacker, status.intermediateStacker).append(positions, status.positions).append(extra, status.extra).isEquals();
+			return new EqualsBuilder().append(device, status.device).append(safeDoor, status.safeDoor)
+					.append(dispenser, status.dispenser).append(intermediateStacker, status.intermediateStacker)
+					.append(positions, status.positions).append(extra, status.extra).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(device).append(safeDoor).append(dispenser).append(intermediateStacker).append(positions).append(extra).toHashCode();
+		return new HashCodeBuilder().append(device).append(safeDoor).append(dispenser).append(intermediateStacker)
+				.append(positions).append(extra).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("device", device).append("safeDoor", safeDoor).append("dispenser", dispenser).append("intermediateStacker", intermediateStacker).append("positions", positions).append("extra", extra).toString();
+		return new ToStringBuilder(this).append("device", device).append("safeDoor", safeDoor)
+				.append("dispenser", dispenser).append("intermediateStacker", intermediateStacker)
+				.append("positions", positions).append("extra", extra).toString();
 	}
 }

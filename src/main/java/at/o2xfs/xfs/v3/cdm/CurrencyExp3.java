@@ -1,12 +1,14 @@
 package at.o2xfs.xfs.v3.cdm;
 
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import at.o2xfs.xfs.util.CurrencyId;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
-@MemoryPropertyOrder({"currencyId", "exponent" })
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.win32.Short;
+import at.o2xfs.xfs.util.CurrencyId;
+
+@MemoryPropertyOrder({ "currencyId", "exponent" })
 public class CurrencyExp3 {
 
 	public static class Builder {
@@ -14,7 +16,8 @@ public class CurrencyExp3 {
 		private CurrencyId currencyId;
 		private int exponent;
 
-		public Builder() { }
+		public Builder() {
+		}
 
 		public Builder currencyId(CurrencyId currencyId) {
 			this.currencyId = currencyId;
@@ -33,6 +36,7 @@ public class CurrencyExp3 {
 
 	private final CurrencyId currencyId;
 
+	@Short
 	private final int exponent;
 
 	protected CurrencyExp3(Builder builder) {
@@ -48,18 +52,22 @@ public class CurrencyExp3 {
 		return exponent;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof CurrencyExp3) {
+		if (obj instanceof CurrencyExp3) {
 			CurrencyExp3 currencyExp = (CurrencyExp3) obj;
-			return new EqualsBuilder().append(currencyId, currencyExp.currencyId).append(exponent, currencyExp.exponent).isEquals();
+			return new EqualsBuilder().append(currencyId, currencyExp.currencyId).append(exponent, currencyExp.exponent)
+					.isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(currencyId).append(exponent).toHashCode();
 	}
 
+	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("currencyId", currencyId).append("exponent", exponent).toString();
 	}

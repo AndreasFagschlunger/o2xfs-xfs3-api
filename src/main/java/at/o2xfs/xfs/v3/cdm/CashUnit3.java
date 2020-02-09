@@ -39,6 +39,8 @@ public class CashUnit3 {
 		private final List<PhysicalCashUnit3> physical = new ArrayList<>();
 
 		public Builder() {
+			unitId = UnitId.empty();
+			currencyId = CurrencyId.empty();
 		}
 
 		public Builder number(int number) {
