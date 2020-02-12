@@ -9,6 +9,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.Pointer;
 import at.o2xfs.xfs.cdm.PresentState;
 import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 import at.o2xfs.xfs.databind.annotation.XfsExtra;
@@ -59,6 +60,7 @@ public class PresentStatus3 {
 		}
 	}
 
+	@Pointer
 	private final Denomination3 denomination;
 
 	@XfsEnum16

@@ -1,13 +1,14 @@
 package at.o2xfs.xfs.v3.cdm;
 
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import at.o2xfs.xfs.v3.cdm.Itemposition3;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
-@MemoryPropertyOrder({"number", "numOfBills", "position" })
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.Pointer;
+import at.o2xfs.memory.databind.annotation.win32.UShort;
+
+@MemoryPropertyOrder({ "number", "numOfBills", "position" })
 public class Calibrate3 {
 
 	public static class Builder {
@@ -16,7 +17,8 @@ public class Calibrate3 {
 		private int numOfBills;
 		private Itemposition3 position;
 
-		public Builder() { }
+		public Builder() {
+		}
 
 		public Builder number(int number) {
 			this.number = number;
@@ -44,6 +46,7 @@ public class Calibrate3 {
 	@UShort
 	private final int numOfBills;
 
+	@Pointer(pointerToPointer = true)
 	private final Itemposition3 position;
 
 	protected Calibrate3(Builder builder) {
@@ -64,19 +67,24 @@ public class Calibrate3 {
 		return position;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Calibrate3) {
+		if (obj instanceof Calibrate3) {
 			Calibrate3 calibrate = (Calibrate3) obj;
-			return new EqualsBuilder().append(number, calibrate.number).append(numOfBills, calibrate.numOfBills).append(position, calibrate.position).isEquals();
+			return new EqualsBuilder().append(number, calibrate.number).append(numOfBills, calibrate.numOfBills)
+					.append(position, calibrate.position).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(number).append(numOfBills).append(position).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("number", number).append("numOfBills", numOfBills).append("position", position).toString();
+		return new ToStringBuilder(this).append("number", number).append("numOfBills", numOfBills)
+				.append("position", position).toString();
 	}
 }

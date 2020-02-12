@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.Pointer;
 import at.o2xfs.xfs.cdm.TellerUpdateAction;
 import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 
@@ -37,6 +38,7 @@ public class TellerUpdate3 {
 	@XfsEnum16
 	private final TellerUpdateAction action;
 
+	@Pointer
 	private final TellerDetails3 tellerDetails;
 
 	protected TellerUpdate3(Builder builder) {

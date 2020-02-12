@@ -11,6 +11,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.NullTerminated;
 import at.o2xfs.xfs.cdm.Device;
 import at.o2xfs.xfs.cdm.Dispenser;
 import at.o2xfs.xfs.cdm.IntermediateStacker;
@@ -117,6 +118,7 @@ public class Status3 {
 	@XfsEnum16
 	private final IntermediateStacker intermediateStacker;
 
+	@NullTerminated
 	private final List<OutputPosition3> positions;
 
 	@XfsExtra

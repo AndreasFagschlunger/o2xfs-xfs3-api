@@ -1,14 +1,15 @@
 package at.o2xfs.xfs.v3.cdm;
 
-import at.o2xfs.xfs.cdm.Failure;
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import at.o2xfs.xfs.databind.annotation.XfsEnum16;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import at.o2xfs.xfs.v3.cdm.CashUnit3;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
-@MemoryPropertyOrder({"failure", "cashUnit" })
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.Pointer;
+import at.o2xfs.xfs.cdm.Failure;
+import at.o2xfs.xfs.databind.annotation.XfsEnum16;
+
+@MemoryPropertyOrder({ "failure", "cashUnit" })
 public class CashUnitError3 {
 
 	public static class Builder {
@@ -16,7 +17,8 @@ public class CashUnitError3 {
 		private Failure failure;
 		private CashUnit3 cashUnit;
 
-		public Builder() { }
+		public Builder() {
+		}
 
 		public Builder failure(Failure failure) {
 			this.failure = failure;
@@ -36,6 +38,7 @@ public class CashUnitError3 {
 	@XfsEnum16
 	private final Failure failure;
 
+	@Pointer
 	private final CashUnit3 cashUnit;
 
 	protected CashUnitError3(Builder builder) {
@@ -51,18 +54,22 @@ public class CashUnitError3 {
 		return cashUnit;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof CashUnitError3) {
+		if (obj instanceof CashUnitError3) {
 			CashUnitError3 cashUnitError = (CashUnitError3) obj;
-			return new EqualsBuilder().append(failure, cashUnitError.failure).append(cashUnit, cashUnitError.cashUnit).isEquals();
+			return new EqualsBuilder().append(failure, cashUnitError.failure).append(cashUnit, cashUnitError.cashUnit)
+					.isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(failure).append(cashUnit).toHashCode();
 	}
 
+	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("failure", failure).append("cashUnit", cashUnit).toString();
 	}
