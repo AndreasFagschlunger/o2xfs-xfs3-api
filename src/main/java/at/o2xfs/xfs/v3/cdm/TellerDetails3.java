@@ -14,6 +14,7 @@ import at.o2xfs.memory.databind.annotation.win32.UShort;
 import at.o2xfs.xfs.cdm.InputPosition;
 import at.o2xfs.xfs.cdm.OutputPosition;
 import at.o2xfs.xfs.databind.annotation.XfsEnum16;
+import at.o2xfs.xfs.databind.annotation.XfsEnum32;
 
 @MemoryPropertyOrder({ "tellerId", "inputPosition", "outputPosition", "tellerTotals" })
 public class TellerDetails3 {
@@ -75,7 +76,7 @@ public class TellerDetails3 {
 	@UShort
 	private final int tellerId;
 
-	@XfsEnum16
+	@XfsEnum32
 	private final InputPosition inputPosition;
 
 	@XfsEnum16

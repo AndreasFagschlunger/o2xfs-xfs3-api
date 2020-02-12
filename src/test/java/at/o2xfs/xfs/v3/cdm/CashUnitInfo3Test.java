@@ -9,7 +9,7 @@ import at.o2xfs.xfs.v3.BaseTest;
 class CashUnitInfo3Test extends BaseTest {
 
 	private CashUnitInfo3 cashUnitInfo = new CashUnitInfo3.Builder()
-			.addList(
+			.addCashUnits(
 					new CashUnit3.Builder().number(1).type(Type.REJECTCASSETTE)
 							.unitId(UnitId.of('R', 'E', 'J', 'C', 'T')).count(10L).status(Status.OK)
 							.addPhysical(new PhysicalCashUnit3.Builder()

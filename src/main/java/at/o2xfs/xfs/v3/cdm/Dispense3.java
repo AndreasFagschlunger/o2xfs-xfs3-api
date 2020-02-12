@@ -5,6 +5,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.Pointer;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
 import at.o2xfs.xfs.cdm.Position;
 import at.o2xfs.xfs.databind.annotation.XfsEnum16;
@@ -65,6 +66,7 @@ public class Dispense3 {
 
 	private final boolean present;
 
+	@Pointer
 	private final Denomination3 denomination;
 
 	protected Dispense3(Builder builder) {

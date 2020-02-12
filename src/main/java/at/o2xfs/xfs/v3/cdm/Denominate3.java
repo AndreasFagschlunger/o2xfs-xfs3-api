@@ -1,13 +1,14 @@
 package at.o2xfs.xfs.v3.cdm;
 
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import at.o2xfs.xfs.v3.cdm.Denomination3;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
-@MemoryPropertyOrder({"tellerId", "mixNumber", "denomination" })
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.Pointer;
+import at.o2xfs.memory.databind.annotation.win32.UShort;
+
+@MemoryPropertyOrder({ "tellerId", "mixNumber", "denomination" })
 public class Denominate3 {
 
 	public static class Builder {
@@ -16,7 +17,8 @@ public class Denominate3 {
 		private int mixNumber;
 		private Denomination3 denomination;
 
-		public Builder() { }
+		public Builder() {
+		}
 
 		public Builder tellerId(int tellerId) {
 			this.tellerId = tellerId;
@@ -44,6 +46,7 @@ public class Denominate3 {
 	@UShort
 	private final int mixNumber;
 
+	@Pointer
 	private final Denomination3 denomination;
 
 	protected Denominate3(Builder builder) {
@@ -64,19 +67,24 @@ public class Denominate3 {
 		return denomination;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Denominate3) {
+		if (obj instanceof Denominate3) {
 			Denominate3 denominate = (Denominate3) obj;
-			return new EqualsBuilder().append(tellerId, denominate.tellerId).append(mixNumber, denominate.mixNumber).append(denomination, denominate.denomination).isEquals();
+			return new EqualsBuilder().append(tellerId, denominate.tellerId).append(mixNumber, denominate.mixNumber)
+					.append(denomination, denominate.denomination).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(tellerId).append(mixNumber).append(denomination).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("tellerId", tellerId).append("mixNumber", mixNumber).append("denomination", denomination).toString();
+		return new ToStringBuilder(this).append("tellerId", tellerId).append("mixNumber", mixNumber)
+				.append("denomination", denomination).toString();
 	}
 }

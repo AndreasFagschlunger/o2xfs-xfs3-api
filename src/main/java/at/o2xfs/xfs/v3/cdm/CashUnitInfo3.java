@@ -1,56 +1,53 @@
 package at.o2xfs.xfs.v3.cdm;
 
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import java.util.List;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import at.o2xfs.xfs.v3.cdm.CashUnit3;
-import java.util.Collections;
-import org.apache.commons.lang3.builder.EqualsBuilder;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-@MemoryPropertyOrder({"tellerId", "count", "list" })
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.win32.UShort;
+
+@MemoryPropertyOrder({ "tellerId", "count", "cashUnits" })
 public class CashUnitInfo3 {
 
 	public static class Builder {
 
 		private int tellerId;
-		private int count;
-		private List<CashUnit3> list = new ArrayList<>();
+		private final List<CashUnit3> cashUnits;
 
-		public Builder() { }
+		public Builder() {
+			cashUnits = new ArrayList<>();
+		}
 
 		public Builder tellerId(int tellerId) {
 			this.tellerId = tellerId;
 			return this;
 		}
 
-		public Builder count(int count) {
-			this.count = count;
+		public Builder addCashUnits(CashUnit3 element) {
+			this.cashUnits.add(element);
 			return this;
 		}
 
-		public Builder addList(CashUnit3 element) {
-			this.list.add(element);
-			return this;
-		}
-
-		public Builder addList(CashUnit3... elements) {
-			for(CashUnit3 each : elements) {
-				this.list.add(each);
+		public Builder addCashUnits(CashUnit3... elements) {
+			for (CashUnit3 each : elements) {
+				this.cashUnits.add(each);
 			}
 			return this;
 		}
 
-		public Builder list(Iterable<CashUnit3> elements) {
-			this.list.clear();
-			return addAllList(elements);
+		public Builder cashUnits(Iterable<CashUnit3> elements) {
+			this.cashUnits.clear();
+			return addAllCashUnits(elements);
 		}
 
-		public Builder addAllList(Iterable<CashUnit3> elements) {
+		public Builder addAllCashUnits(Iterable<CashUnit3> elements) {
 			for (CashUnit3 each : elements) {
-				this.list.add(each);
+				this.cashUnits.add(each);
 			}
 			return this;
 		}
@@ -63,42 +60,38 @@ public class CashUnitInfo3 {
 	@UShort
 	private final int tellerId;
 
-	@UShort
-	private final int count;
-
-	private final List<CashUnit3> list;
+	private final List<CashUnit3> cashUnits;
 
 	protected CashUnitInfo3(Builder builder) {
 		tellerId = builder.tellerId;
-		count = builder.count;
-		list = Collections.unmodifiableList(new ArrayList<>(builder.list));
+		cashUnits = Collections.unmodifiableList(new ArrayList<>(builder.cashUnits));
 	}
 
 	public int getTellerId() {
 		return tellerId;
 	}
 
-	public int getCount() {
-		return count;
+	public List<CashUnit3> getCashUnits() {
+		return cashUnits;
 	}
 
-	public List<CashUnit3> getList() {
-		return list;
-	}
-
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof CashUnitInfo3) {
+		if (obj instanceof CashUnitInfo3) {
 			CashUnitInfo3 cashUnitInfo = (CashUnitInfo3) obj;
-			return new EqualsBuilder().append(tellerId, cashUnitInfo.tellerId).append(count, cashUnitInfo.count).append(list, cashUnitInfo.list).isEquals();
+			return new EqualsBuilder().append(tellerId, cashUnitInfo.tellerId).append(cashUnits, cashUnitInfo.cashUnits)
+					.isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(tellerId).append(count).append(list).toHashCode();
+		return new HashCodeBuilder().append(tellerId).append(cashUnits).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("tellerId", tellerId).append("count", count).append("list", list).toString();
+		return new ToStringBuilder(this).append("tellerId", tellerId).append("cashUnits", cashUnits).toString();
 	}
 }
