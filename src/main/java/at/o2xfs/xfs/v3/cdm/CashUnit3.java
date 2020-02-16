@@ -1,12 +1,13 @@
 package at.o2xfs.xfs.v3.cdm;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.ULong;
@@ -18,7 +19,7 @@ import at.o2xfs.xfs.util.CurrencyId;
 import at.o2xfs.xfs.util.UnitId;
 
 @MemoryPropertyOrder({ "number", "type", "cashUnitName", "unitId", "currencyId", "values", "initialCount", "count",
-		"rejectCount", "minimum", "maximum", "appLock", "status", "numPhysicalCUs", "physical" })
+		"rejectCount", "minimum", "maximum", "appLock", "status", "physicalCashUnits" })
 public class CashUnit3 {
 
 	public static class Builder {
@@ -36,11 +37,12 @@ public class CashUnit3 {
 		private long maximum;
 		private boolean appLock;
 		private Status status;
-		private final List<PhysicalCashUnit3> physical = new ArrayList<>();
+		private final List<PhysicalCashUnit3> physicalCashUnits;
 
 		public Builder() {
 			unitId = UnitId.empty();
 			currencyId = CurrencyId.empty();
+			physicalCashUnits = new ArrayList<>();
 		}
 
 		public Builder number(int number) {
@@ -108,26 +110,26 @@ public class CashUnit3 {
 			return this;
 		}
 
-		public Builder addPhysical(PhysicalCashUnit3 element) {
-			this.physical.add(element);
+		public Builder addPhysicalCashUnits(PhysicalCashUnit3 element) {
+			this.physicalCashUnits.add(element);
 			return this;
 		}
 
-		public Builder addPhysical(PhysicalCashUnit3... elements) {
+		public Builder addPhysicalCashUnits(PhysicalCashUnit3... elements) {
 			for (PhysicalCashUnit3 each : elements) {
-				this.physical.add(each);
+				this.physicalCashUnits.add(each);
 			}
 			return this;
 		}
 
-		public Builder physical(Iterable<? extends PhysicalCashUnit3> elements) {
-			this.physical.clear();
-			return addAllPhysical(elements);
+		public Builder physicalCashUnits(Iterable<? extends PhysicalCashUnit3> elements) {
+			this.physicalCashUnits.clear();
+			return addAllPhysicalCashUnit(elements);
 		}
 
-		public Builder addAllPhysical(Iterable<? extends PhysicalCashUnit3> elements) {
+		public Builder addAllPhysicalCashUnit(Iterable<? extends PhysicalCashUnit3> elements) {
 			for (PhysicalCashUnit3 each : elements) {
-				this.physical.add(each);
+				this.physicalCashUnits.add(each);
 			}
 			return this;
 		}
@@ -147,6 +149,7 @@ public class CashUnit3 {
 
 	private final UnitId unitId;
 
+	@JsonIgnore
 	private final CurrencyId currencyId;
 
 	@ULong
@@ -172,7 +175,7 @@ public class CashUnit3 {
 	@XfsEnum16
 	private final Status status;
 
-	private final List<PhysicalCashUnit3> physical;
+	private final List<? extends PhysicalCashUnit3> physicalCashUnits;
 
 	protected CashUnit3(Builder builder) {
 		number = builder.number;
@@ -188,7 +191,7 @@ public class CashUnit3 {
 		maximum = builder.maximum;
 		appLock = builder.appLock;
 		status = builder.status;
-		physical = Collections.unmodifiableList(new ArrayList<>(builder.physical));
+		physicalCashUnits = builder.physicalCashUnits;
 	}
 
 	public int getNumber() {
@@ -243,8 +246,8 @@ public class CashUnit3 {
 		return status;
 	}
 
-	public List<PhysicalCashUnit3> getPhysical() {
-		return physical;
+	public List<? extends PhysicalCashUnit3> getPhysicalCashUnits() {
+		return physicalCashUnits;
 	}
 
 	@Override
@@ -257,7 +260,7 @@ public class CashUnit3 {
 					.append(initialCount, cashUnit.initialCount).append(count, cashUnit.count)
 					.append(rejectCount, cashUnit.rejectCount).append(minimum, cashUnit.minimum)
 					.append(maximum, cashUnit.maximum).append(appLock, cashUnit.appLock).append(status, cashUnit.status)
-					.append(physical, cashUnit.physical).isEquals();
+					.append(physicalCashUnits, cashUnit.physicalCashUnits).isEquals();
 		}
 		return false;
 	}
@@ -266,7 +269,7 @@ public class CashUnit3 {
 	public int hashCode() {
 		return new HashCodeBuilder().append(number).append(type).append(cashUnitName).append(unitId).append(currencyId)
 				.append(values).append(initialCount).append(count).append(rejectCount).append(minimum).append(maximum)
-				.append(appLock).append(status).append(physical).toHashCode();
+				.append(appLock).append(status).append(physicalCashUnits).toHashCode();
 	}
 
 	@Override
@@ -275,6 +278,7 @@ public class CashUnit3 {
 				.append("cashUnitName", cashUnitName).append("unitId", unitId).append("currencyId", currencyId)
 				.append("values", values).append("initialCount", initialCount).append("count", count)
 				.append("rejectCount", rejectCount).append("minimum", minimum).append("maximum", maximum)
-				.append("appLock", appLock).append("status", status).append("physical", physical).toString();
+				.append("appLock", appLock).append("status", status).append("physicalCashUnits", physicalCashUnits)
+				.toString();
 	}
 }
