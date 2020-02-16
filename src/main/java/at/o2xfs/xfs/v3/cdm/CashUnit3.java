@@ -7,8 +7,6 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.ULong;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
@@ -149,7 +147,6 @@ public class CashUnit3 {
 
 	private final UnitId unitId;
 
-	@JsonIgnore
 	private final CurrencyId currencyId;
 
 	@ULong
