@@ -13,7 +13,7 @@ class CashUnitError3Test extends BaseTest {
 			.cashUnit(new CashUnit3.Builder().number(3).type(Type.BILLCASSETTE).cashUnitName("SLOT3")
 					.currencyId(StandardCurrencyIds.EUR).values(1000).initialCount(300L).count(50).rejectCount(1)
 					.maximum(2000).status(Status.INOP)
-					.addPhysical(
+					.addPhysicalCashUnits(
 							new PhysicalCashUnit3.Builder().physicalPositionName("SLOT3A")
 									.unitId(UnitId.of('U', 'S', 'D', ' ', '1')).initialCount(150).count(50)
 									.status(Status.INOP).build(),

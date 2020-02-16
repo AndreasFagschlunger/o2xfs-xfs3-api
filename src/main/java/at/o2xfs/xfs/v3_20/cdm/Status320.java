@@ -1,91 +1,119 @@
 package at.o2xfs.xfs.v3_20.cdm;
 
-import at.o2xfs.xfs.v3_10.cdm.Status310;
-import at.o2xfs.xfs.cdm.GuidLights;
-import at.o2xfs.xfs.databind.annotation.XfsEnum16;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import at.o2xfs.xfs.cdm.SafeDoor;
-import at.o2xfs.xfs.cdm.IntermediateStacker;
-import at.o2xfs.xfs.v3.cdm.Status3;
-import at.o2xfs.xfs.v3.cdm.OutputPosition3;
-import java.util.ArrayList;
-import at.o2xfs.xfs.cdm.Device;
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import java.util.List;
-import at.o2xfs.xfs.cdm.Dispenser;
-import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.Map;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import at.o2xfs.xfs.databind.annotation.XfsEnum32;
-import java.util.Collections;
-import at.o2xfs.xfs.databind.annotation.XfsExtra;
-import at.o2xfs.xfs.cdm.AntiFraudModule;
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import java.util.Set;
 
-@MemoryPropertyOrder({"antiFraudModule" })
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.xfs.cdm.AntiFraudModule;
+import at.o2xfs.xfs.cdm.Device;
+import at.o2xfs.xfs.cdm.DevicePosition;
+import at.o2xfs.xfs.cdm.Dispenser;
+import at.o2xfs.xfs.cdm.GuidLight;
+import at.o2xfs.xfs.cdm.IntermediateStacker;
+import at.o2xfs.xfs.cdm.SafeDoor;
+import at.o2xfs.xfs.databind.annotation.XfsEnum16;
+import at.o2xfs.xfs.v3.cdm.OutputPosition3;
+import at.o2xfs.xfs.v3_10.cdm.Status310;
+
+@MemoryPropertyOrder({ "antiFraudModule" })
 public class Status320 extends Status310 {
 
 	public static class Builder extends Status310.Builder {
 
 		private AntiFraudModule antiFraudModule;
 
-		public Builder() { }
+		public Builder() {
+		}
 
+		@Override
 		public Builder device(Device device) {
 			super.device(device);
 			return this;
 		}
 
+		@Override
 		public Builder safeDoor(SafeDoor safeDoor) {
 			super.safeDoor(safeDoor);
 			return this;
 		}
 
+		@Override
 		public Builder dispenser(Dispenser dispenser) {
 			super.dispenser(dispenser);
 			return this;
 		}
 
+		@Override
 		public Builder intermediateStacker(IntermediateStacker intermediateStacker) {
 			super.intermediateStacker(intermediateStacker);
 			return this;
 		}
 
+		@Override
 		public Builder addPosition(OutputPosition3 element) {
 			super.addPosition(element);
 			return this;
 		}
 
+		@Override
 		public Builder addPosition(OutputPosition3... elements) {
 			super.addPosition(elements);
 			return this;
 		}
 
+		@Override
 		public Builder positions(Iterable<OutputPosition3> elements) {
 			super.positions(elements);
 			return this;
 		}
 
+		@Override
 		public Builder addAllPositions(Iterable<OutputPosition3> elements) {
 			super.addAllPositions(elements);
 			return this;
 		}
 
+		@Override
 		public Builder extra(Map<String, String> extra) {
 			super.extra(extra);
 			return this;
 		}
 
-		public Builder guidLights(GuidLights guidLights) {
-			super.guidLights(guidLights);
+		@Override
+		public Builder putExtra(String key, String value) {
+			super.putExtra(key, value);
 			return this;
 		}
 
-		public Builder devicePosition(int devicePosition) {
+		@Override
+		public Builder putAllExtra(Map<String, String> entries) {
+			super.putAllExtra(entries);
+			return this;
+		}
+
+		@Override
+		public Builder setGuidLight(int index, Set<GuidLight> element) {
+			super.setGuidLight(index, element);
+			return this;
+		}
+
+		@Override
+		public Builder guidLights(Iterable<Set<GuidLight>> elements) {
+			super.guidLights(elements);
+			return this;
+		}
+
+		@Override
+		public Builder devicePosition(DevicePosition devicePosition) {
 			super.devicePosition(devicePosition);
 			return this;
 		}
 
+		@Override
 		public Builder powerSaveRecoveryTime(int powerSaveRecoveryTime) {
 			super.powerSaveRecoveryTime(powerSaveRecoveryTime);
 			return this;
@@ -96,6 +124,7 @@ public class Status320 extends Status310 {
 			return this;
 		}
 
+		@Override
 		public Status320 build() {
 			return new Status320(this);
 		}
@@ -113,19 +142,24 @@ public class Status320 extends Status310 {
 		return antiFraudModule;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Status320) {
+		if (obj instanceof Status320) {
 			Status320 status = (Status320) obj;
-			return new EqualsBuilder().appendSuper(super.equals(obj)).append(antiFraudModule, status.antiFraudModule).isEquals();
+			return new EqualsBuilder().appendSuper(super.equals(obj)).append(antiFraudModule, status.antiFraudModule)
+					.isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().appendSuper(super.hashCode()).append(antiFraudModule).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).appendSuper(super.toString()).append("antiFraudModule", antiFraudModule).toString();
+		return new ToStringBuilder(this).appendSuper(super.toString()).append("antiFraudModule", antiFraudModule)
+				.toString();
 	}
 }

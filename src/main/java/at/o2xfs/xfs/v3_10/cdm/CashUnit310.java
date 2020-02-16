@@ -1,5 +1,7 @@
 package at.o2xfs.xfs.v3_10.cdm;
 
+import java.util.List;
+
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -11,119 +13,101 @@ import at.o2xfs.xfs.cdm.Type;
 import at.o2xfs.xfs.util.CurrencyId;
 import at.o2xfs.xfs.util.UnitId;
 import at.o2xfs.xfs.v3.cdm.CashUnit3;
-import at.o2xfs.xfs.v3.cdm.PhysicalCashUnit3;
 
 @MemoryPropertyOrder({ "dispensedCount", "presentedCount", "retractedCount" })
 public class CashUnit310 extends CashUnit3 {
 
-	public static class Builder extends CashUnit3.Builder {
-
+	public static class Builder {
+		private int number;
+		private Type type;
+		private String cashUnitName;
+		private UnitId unitId;
+		private CurrencyId currencyId;
+		private long values;
+		private long initialCount;
+		private long count;
+		private long rejectCount;
+		private long minimum;
+		private long maximum;
+		private boolean appLock;
+		private Status status;
+		private List<? extends PhysicalCashUnit310> physicalCashUnits;
 		private long dispensedCount;
 		private long presentedCount;
 		private long retractedCount;
 
 		public Builder() {
+			unitId = UnitId.empty();
+			currencyId = CurrencyId.empty();
 		}
 
-		@Override
 		public Builder number(int number) {
-			super.number(number);
+			this.number = number;
 			return this;
 		}
 
-		@Override
 		public Builder type(Type type) {
-			super.type(type);
+			this.type = type;
 			return this;
 		}
 
-		@Override
 		public Builder cashUnitName(String cashUnitName) {
-			super.cashUnitName(cashUnitName);
+			this.cashUnitName = cashUnitName;
 			return this;
 		}
 
-		@Override
 		public Builder unitId(UnitId unitId) {
-			super.unitId(unitId);
+			this.unitId = unitId;
 			return this;
 		}
 
-		@Override
 		public Builder currencyId(CurrencyId currencyId) {
-			super.currencyId(currencyId);
+			this.currencyId = currencyId;
 			return this;
 		}
 
-		@Override
 		public Builder values(long values) {
-			super.values(values);
+			this.values = values;
 			return this;
 		}
 
-		@Override
 		public Builder initialCount(long initialCount) {
-			super.initialCount(initialCount);
+			this.initialCount = initialCount;
 			return this;
 		}
 
-		@Override
 		public Builder count(long count) {
-			super.count(count);
+			this.count = count;
 			return this;
 		}
 
-		@Override
 		public Builder rejectCount(long rejectCount) {
-			super.rejectCount(rejectCount);
+			this.rejectCount = rejectCount;
 			return this;
 		}
 
-		@Override
 		public Builder minimum(long minimum) {
-			super.minimum(minimum);
+			this.minimum = minimum;
 			return this;
 		}
 
-		@Override
 		public Builder maximum(long maximum) {
-			super.maximum(maximum);
+			this.maximum = maximum;
 			return this;
 		}
 
-		@Override
 		public Builder appLock(boolean appLock) {
-			super.appLock(appLock);
+			this.appLock = appLock;
 			return this;
 		}
 
-		@Override
 		public Builder status(Status status) {
-			super.status(status);
+			this.status = status;
 			return this;
 		}
 
-		@Override
-		public Builder addPhysical(PhysicalCashUnit3 element) {
-			super.addPhysical(element);
-			return this;
-		}
-
-		@Override
-		public Builder addPhysical(PhysicalCashUnit3... elements) {
-			super.addPhysical(elements);
-			return this;
-		}
-
-		@Override
-		public Builder physical(Iterable<? extends PhysicalCashUnit3> elements) {
-			super.physical(elements);
-			return this;
-		}
-
-		@Override
-		public Builder addAllPhysical(Iterable<? extends PhysicalCashUnit3> elements) {
-			super.addAllPhysical(elements);
+		public Builder physicalCashUnits(List<? extends PhysicalCashUnit310> physicalCashUnits) {
+			this.physicalCashUnits = physicalCashUnits;
 			return this;
 		}
 
@@ -142,7 +126,6 @@ public class CashUnit310 extends CashUnit3 {
 			return this;
 		}
 
-		@Override
 		public CashUnit310 build() {
 			return new CashUnit310(this);
 		}
@@ -158,10 +141,20 @@ public class CashUnit310 extends CashUnit3 {
 	private final long retractedCount;
 
 	protected CashUnit310(Builder builder) {
-		super(builder);
+		super(new CashUnit3.Builder().number(builder.number).type(builder.type).cashUnitName(builder.cashUnitName)
+				.currencyId(builder.currencyId).unitId(builder.unitId).values(builder.values)
+				.initialCount(builder.initialCount).count(builder.count).rejectCount(builder.rejectCount)
+				.minimum(builder.minimum).maximum(builder.maximum).appLock(builder.appLock).status(builder.status)
+				.physicalCashUnits(builder.physicalCashUnits));
 		dispensedCount = builder.dispensedCount;
 		presentedCount = builder.presentedCount;
 		retractedCount = builder.retractedCount;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<? extends PhysicalCashUnit310> getPhysicalCashUnits() {
+		return (List<? extends PhysicalCashUnit310>) super.getPhysicalCashUnits();
 	}
 
 	public long getDispensedCount() {
