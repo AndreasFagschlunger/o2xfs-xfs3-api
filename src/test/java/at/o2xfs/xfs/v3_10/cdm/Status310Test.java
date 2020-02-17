@@ -26,7 +26,7 @@ class Status310Test extends BaseTest {
 						.positionStatus(PositionStatus.EMPTY).transport(Transport.OK)
 						.transportStatus(TransportStatus.EMPTY).build())
 				.putExtra("LASTERROR", "StClass=00000000,StCode=00000000").putExtra("LastErrorText", "OK:none")
-				.setGuidLight(0, EnumSet.of(GuidLight.GREEN, GuidLight.MEDIUM_FLASH))
+				.setGuidLights(0, EnumSet.of(GuidLight.GREEN, GuidLight.MEDIUM_FLASH))
 				.devicePosition(DevicePosition.POSUNKNOWN).powerSaveRecoveryTime(3).build();
 	}
 }

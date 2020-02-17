@@ -10,7 +10,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
-import at.o2xfs.xfs.cdm.CdmGuidLights;
+import at.o2xfs.xfs.cdm.GuidLight;
 import at.o2xfs.xfs.databind.annotation.XfsEnumSet32;
 
 @MemoryPropertyOrder({ "guidLight", "command" })
@@ -19,7 +19,7 @@ public class SetGuidlight310 {
 	public static class Builder {
 
 		private int guidLight;
-		private EnumSet<CdmGuidLights> command = EnumSet.noneOf(CdmGuidLights.class);
+		private Set<GuidLight> command = EnumSet.noneOf(GuidLight.class);
 
 		public Builder() {
 		}
@@ -29,25 +29,25 @@ public class SetGuidlight310 {
 			return this;
 		}
 
-		public Builder addCommand(CdmGuidLights element) {
+		public Builder addCommand(GuidLight element) {
 			this.command.add(element);
 			return this;
 		}
 
-		public Builder addCommand(CdmGuidLights... elements) {
-			for (CdmGuidLights each : elements) {
+		public Builder addCommand(GuidLight... elements) {
+			for (GuidLight each : elements) {
 				this.command.add(each);
 			}
 			return this;
 		}
 
-		public Builder command(Iterable<CdmGuidLights> elements) {
+		public Builder command(Iterable<GuidLight> elements) {
 			this.command.clear();
 			return addAllCommand(elements);
 		}
 
-		public Builder addAllCommand(Iterable<CdmGuidLights> elements) {
-			for (CdmGuidLights each : elements) {
+		public Builder addAllCommand(Iterable<GuidLight> elements) {
+			for (GuidLight each : elements) {
 				this.command.add(each);
 			}
 			return this;
@@ -62,7 +62,7 @@ public class SetGuidlight310 {
 	private final int guidLight;
 
 	@XfsEnumSet32
-	private final Set<CdmGuidLights> command;
+	private final Set<GuidLight> command;
 
 	protected SetGuidlight310(Builder builder) {
 		guidLight = builder.guidLight;
@@ -73,7 +73,7 @@ public class SetGuidlight310 {
 		return guidLight;
 	}
 
-	public Set<CdmGuidLights> getCommand() {
+	public Set<GuidLight> getCommand() {
 		return command;
 	}
 

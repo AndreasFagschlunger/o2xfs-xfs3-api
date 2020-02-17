@@ -24,7 +24,7 @@ class Capabilities310Test extends BaseTest {
 				.retractStackerActions(EnumSet.of(RetractStackerAction.PRESENT, RetractStackerAction.RETRACT))
 				.safeDoor(false).cashBox(false).intermediateStacker(true).itemsTakenSensor(true)
 				.positions(EnumSet.of(Position.FRONT)).exchangeType(EnumSet.of(ExchangeType.BYHAND))
-				.extra(MapUtil.of("Key1", "Value1")).addGuidLights(EnumSet.of(GuidLight.QUICK_FLASH,
+				.extra(MapUtil.of("Key1", "Value1")).setGuidLights(0, EnumSet.of(GuidLight.QUICK_FLASH,
 						GuidLight.MEDIUM_FLASH, GuidLight.SLOW_FLASH, GuidLight.RED, GuidLight.GREEN))
 				.build();
 	}
