@@ -96,8 +96,8 @@ public class Status320 extends Status310 {
 		}
 
 		@Override
-		public Builder setGuidLight(int index, Set<GuidLight> element) {
-			super.setGuidLight(index, element);
+		public Builder setGuidLights(int index, Set<GuidLight> element) {
+			super.setGuidLights(index, element);
 			return this;
 		}
 

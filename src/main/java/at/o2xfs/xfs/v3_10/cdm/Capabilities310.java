@@ -37,6 +37,9 @@ public class Capabilities310 extends Capabilities3 {
 
 		public Builder() {
 			guidLights = new ArrayList<>();
+			for (int i = 0; i < GUIDLIGHTS_MAX; i++) {
+				guidLights.add(Collections.emptySet());
+			}
 		}
 
 		@Override
@@ -244,31 +247,32 @@ public class Capabilities310 extends Capabilities3 {
 		}
 
 		@Override
-		public Builder extra(Map<String, String> extra) {
-			super.extra(extra);
+		public Builder putExtra(String key, String value) {
+			super.putExtra(key, value);
 			return this;
 		}
 
-		public Builder addGuidLights(Set<GuidLight> element) {
-			this.guidLights.add(element);
+		@Override
+		public Builder extra(Map<String, String> entries) {
+			super.extra(entries);
 			return this;
 		}
 
-		public Builder addGuidLights(Set<GuidLight>... elements) {
-			for (Set<GuidLight> each : elements) {
-				this.guidLights.add(each);
-			}
+		@Override
+		public Builder putAllExtra(Map<String, String> entries) {
+			super.putAllExtra(entries);
+			return this;
+		}
+
+		public Builder setGuidLights(int index, Set<GuidLight> element) {
+			this.guidLights.set(index, EnumSet.copyOf(element));
 			return this;
 		}
 
 		public Builder guidLights(Iterable<Set<GuidLight>> elements) {
-			this.guidLights.clear();
-			return addAllGuidLights(elements);
-		}
-
-		public Builder addAllGuidLights(Iterable<Set<GuidLight>> elements) {
+			int i = 0;
 			for (Set<GuidLight> each : elements) {
-				this.guidLights.add(each);
+				this.guidLights.set(i++, each);
 			}
 			return this;
 		}

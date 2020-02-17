@@ -109,7 +109,7 @@ public class Status310 extends Status3 {
 			return this;
 		}
 
-		public Builder setGuidLight(int index, Set<GuidLight> element) {
+		public Builder setGuidLights(int index, Set<GuidLight> element) {
 			this.guidLights.set(index, EnumSet.copyOf(element));
 			return this;
 		}

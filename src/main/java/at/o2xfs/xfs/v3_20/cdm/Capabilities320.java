@@ -234,32 +234,32 @@ public class Capabilities320 extends Capabilities310 {
 		}
 
 		@Override
-		public Builder extra(Map<String, String> extra) {
-			super.extra(extra);
+		public Builder putExtra(String key, String value) {
+			super.putExtra(key, value);
 			return this;
 		}
 
 		@Override
-		public Builder addGuidLights(Set<GuidLight> element) {
-			super.addGuidLights(element);
+		public Builder extra(Map<String, String> entries) {
+			super.extra(entries);
 			return this;
 		}
 
 		@Override
-		public Builder addGuidLights(Set<GuidLight>... elements) {
-			super.addGuidLights(elements);
+		public Builder putAllExtra(Map<String, String> entries) {
+			super.putAllExtra(entries);
+			return this;
+		}
+
+		@Override
+		public Builder setGuidLights(int index, Set<GuidLight> element) {
+			super.setGuidLights(index, element);
 			return this;
 		}
 
 		@Override
 		public Builder guidLights(Iterable<Set<GuidLight>> elements) {
 			super.guidLights(elements);
-			return this;
-		}
-
-		@Override
-		public Builder addAllGuidLights(Iterable<Set<GuidLight>> elements) {
-			super.addAllGuidLights(elements);
 			return this;
 		}
 

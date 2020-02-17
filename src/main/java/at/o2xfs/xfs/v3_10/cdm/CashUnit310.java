@@ -1,5 +1,6 @@
 package at.o2xfs.xfs.v3_10.cdm;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -31,7 +32,7 @@ public class CashUnit310 extends CashUnit3 {
 		private long maximum;
 		private boolean appLock;
 		private Status status;
-		private List<? extends PhysicalCashUnit310> physicalCashUnits;
+		private final List<PhysicalCashUnit310> physicalCashUnits;
 		private long dispensedCount;
 		private long presentedCount;
 		private long retractedCount;
@@ -39,6 +40,7 @@ public class CashUnit310 extends CashUnit3 {
 		public Builder() {
 			unitId = UnitId.empty();
 			currencyId = CurrencyId.empty();
+			physicalCashUnits = new ArrayList<>();
 		}
 
 		public Builder number(int number) {
@@ -106,8 +108,27 @@ public class CashUnit310 extends CashUnit3 {
 			return this;
 		}
 
-		public Builder physicalCashUnits(List<? extends PhysicalCashUnit310> physicalCashUnits) {
-			this.physicalCashUnits = physicalCashUnits;
+		public Builder addPhysicalCashUnits(PhysicalCashUnit310 element) {
+			this.physicalCashUnits.add(element);
+			return this;
+		}
+
+		public Builder addPhysicalCashUnits(PhysicalCashUnit310... elements) {
+			for (PhysicalCashUnit310 each : elements) {
+				this.physicalCashUnits.add(each);
+			}
+			return this;
+		}
+
+		public Builder physicalCashUnits(Iterable<? extends PhysicalCashUnit310> elements) {
+			this.physicalCashUnits.clear();
+			return addAllPhysicalCashUnit(elements);
+		}
+
+		public Builder addAllPhysicalCashUnit(Iterable<? extends PhysicalCashUnit310> elements) {
+			for (PhysicalCashUnit310 each : elements) {
+				this.physicalCashUnits.add(each);
+			}
 			return this;
 		}
 
