@@ -1,44 +1,42 @@
 package at.o2xfs.xfs.v3_30.cdm;
 
-import at.o2xfs.memory.databind.annotation.win32.UnicodeString;
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import java.util.List;
-import at.o2xfs.xfs.v3_30.cdm.BlacklistElement330;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import java.util.Collections;
-import org.apache.commons.lang3.builder.EqualsBuilder;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
 
-@MemoryPropertyOrder({"version", "count", "blacklistElements" })
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.win32.OptionalUnicode;
+
+@MemoryPropertyOrder({ "version", "count", "blacklistElements" })
 public class Blacklist330 {
 
 	public static class Builder {
 
-		private String version;
-		private int count;
-		private List<BlacklistElement330> blacklistElements = new ArrayList<>();
+		private Optional<String> version;
+		private final List<BlacklistElement330> blacklistElements;
 
-		public Builder() { }
+		public Builder() {
+			version = Optional.empty();
+			blacklistElements = new ArrayList<>();
+		}
 
-		public Builder version(String version) {
+		public Builder version(Optional<String> version) {
 			this.version = version;
 			return this;
 		}
 
-		public Builder count(int count) {
-			this.count = count;
-			return this;
-		}
-
-		public Builder addBlacklistElement(BlacklistElement330 element) {
+		public Builder addBlacklistElements(BlacklistElement330 element) {
 			this.blacklistElements.add(element);
 			return this;
 		}
 
-		public Builder addBlacklistElement(BlacklistElement330... elements) {
-			for(BlacklistElement330 each : elements) {
+		public Builder addBlacklistElements(BlacklistElement330... elements) {
+			for (BlacklistElement330 each : elements) {
 				this.blacklistElements.add(each);
 			}
 			return this;
@@ -61,45 +59,42 @@ public class Blacklist330 {
 		}
 	}
 
-	@UnicodeString
-	private final String version;
-
-	@UShort
-	private final int count;
+	@OptionalUnicode
+	private final Optional<String> version;
 
 	private final List<BlacklistElement330> blacklistElements;
 
 	protected Blacklist330(Builder builder) {
 		version = builder.version;
-		count = builder.count;
 		blacklistElements = Collections.unmodifiableList(new ArrayList<>(builder.blacklistElements));
 	}
 
-	public String getVersion() {
+	public Optional<String> getVersion() {
 		return version;
-	}
-
-	public int getCount() {
-		return count;
 	}
 
 	public List<BlacklistElement330> getBlacklistElements() {
 		return blacklistElements;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Blacklist330) {
+		if (obj instanceof Blacklist330) {
 			Blacklist330 blacklist = (Blacklist330) obj;
-			return new EqualsBuilder().append(version, blacklist.version).append(count, blacklist.count).append(blacklistElements, blacklist.blacklistElements).isEquals();
+			return new EqualsBuilder().append(version, blacklist.version)
+					.append(blacklistElements, blacklist.blacklistElements).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(version).append(count).append(blacklistElements).toHashCode();
+		return new HashCodeBuilder().append(version).append(blacklistElements).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("version", version).append("count", count).append("blacklistElements", blacklistElements).toString();
+		return new ToStringBuilder(this).append("version", version).append("blacklistElements", blacklistElements)
+				.toString();
 	}
 }

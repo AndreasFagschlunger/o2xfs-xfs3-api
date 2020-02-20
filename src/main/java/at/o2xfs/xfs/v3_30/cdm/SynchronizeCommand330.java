@@ -5,21 +5,21 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import at.o2xfs.xfs.cdm.CdmExecuteCommand;
-import at.o2xfs.xfs.databind.annotation.XfsEnum32;
+import at.o2xfs.memory.databind.annotation.Pointer;
+import at.o2xfs.memory.databind.annotation.win32.ULong;
 
 @MemoryPropertyOrder({ "command", "cmdData" })
 public class SynchronizeCommand330 {
 
 	public static class Builder {
 
-		private CdmExecuteCommand command;
+		private long command;
 		private Object cmdData;
 
 		public Builder() {
 		}
 
-		public Builder command(CdmExecuteCommand command) {
+		public Builder command(long command) {
 			this.command = command;
 			return this;
 		}
@@ -34,9 +34,10 @@ public class SynchronizeCommand330 {
 		}
 	}
 
-	@XfsEnum32
-	private final CdmExecuteCommand command;
+	@ULong
+	private final long command;
 
+	@Pointer
 	private final Object cmdData;
 
 	protected SynchronizeCommand330(Builder builder) {
@@ -44,7 +45,7 @@ public class SynchronizeCommand330 {
 		cmdData = builder.cmdData;
 	}
 
-	public CdmExecuteCommand getCommand() {
+	public long getCommand() {
 		return command;
 	}
 

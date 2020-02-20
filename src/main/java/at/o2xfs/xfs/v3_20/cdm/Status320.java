@@ -27,6 +27,7 @@ public class Status320 extends Status310 {
 		private AntiFraudModule antiFraudModule;
 
 		public Builder() {
+			antiFraudModule = AntiFraudModule.NOTSUPP;
 		}
 
 		@Override
