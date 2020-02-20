@@ -1,20 +1,23 @@
 package at.o2xfs.xfs.v3_30.cdm;
 
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import at.o2xfs.xfs.cdm.Level;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
-@MemoryPropertyOrder({"level" })
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.xfs.cdm.Level;
+import at.o2xfs.xfs.databind.annotation.XfsEnum16;
+
+@MemoryPropertyOrder({ "level" })
 public class GetAllItemsInfo330 {
 
 	public static class Builder {
 
 		private Level level;
 
-		public Builder() { }
+		public Builder() {
+			level = Level.LEVEL_ALL;
+		}
 
 		public Builder level(Level level) {
 			this.level = level;
@@ -26,7 +29,7 @@ public class GetAllItemsInfo330 {
 		}
 	}
 
-	@UShort
+	@XfsEnum16
 	private final Level level;
 
 	protected GetAllItemsInfo330(Builder builder) {
@@ -37,18 +40,21 @@ public class GetAllItemsInfo330 {
 		return level;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof GetAllItemsInfo330) {
+		if (obj instanceof GetAllItemsInfo330) {
 			GetAllItemsInfo330 getAllItemsInfo = (GetAllItemsInfo330) obj;
 			return new EqualsBuilder().append(level, getAllItemsInfo.level).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(level).toHashCode();
 	}
 
+	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("level", level).toString();
 	}

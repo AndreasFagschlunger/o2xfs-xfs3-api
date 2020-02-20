@@ -1,19 +1,23 @@
 package at.o2xfs.xfs.v3_30.cdm;
 
-import at.o2xfs.xfs.cdm.ItemLocation;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import at.o2xfs.xfs.databind.annotation.XfsEnum16;
-import at.o2xfs.memory.databind.annotation.win32.ULong;
-import at.o2xfs.xfs.cdm.OnBlacklist;
-import at.o2xfs.xfs.util.CurrencyId;
-import at.o2xfs.memory.databind.annotation.win32.UnicodeString;
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import at.o2xfs.xfs.cdm.Level;
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import java.util.Optional;
 
-@MemoryPropertyOrder({"level", "currencyId", "value", "release", "serialNumber", "imageFileName", "onBlacklist", "itemLocation", "number" })
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.win32.OptionalUnicode;
+import at.o2xfs.memory.databind.annotation.win32.ULong;
+import at.o2xfs.memory.databind.annotation.win32.UShort;
+import at.o2xfs.xfs.cdm.ItemLocation;
+import at.o2xfs.xfs.cdm.Level;
+import at.o2xfs.xfs.cdm.OnBlacklist;
+import at.o2xfs.xfs.databind.annotation.XfsEnum16;
+import at.o2xfs.xfs.util.CurrencyId;
+
+@MemoryPropertyOrder({ "level", "currencyId", "value", "release", "serialNumber", "imageFileName", "onBlacklist",
+		"itemLocation", "number" })
 public class ItemInfoAll330 {
 
 	public static class Builder {
@@ -22,13 +26,17 @@ public class ItemInfoAll330 {
 		private CurrencyId currencyId;
 		private long value;
 		private int release;
-		private String serialNumber;
-		private String imageFileName;
+		private Optional<String> serialNumber;
+		private Optional<String> imageFileName;
 		private OnBlacklist onBlacklist;
 		private ItemLocation itemLocation;
 		private int number;
 
-		public Builder() { }
+		public Builder() {
+			currencyId = CurrencyId.empty();
+			serialNumber = Optional.empty();
+			imageFileName = Optional.empty();
+		}
 
 		public Builder level(Level level) {
 			this.level = level;
@@ -50,12 +58,12 @@ public class ItemInfoAll330 {
 			return this;
 		}
 
-		public Builder serialNumber(String serialNumber) {
+		public Builder serialNumber(Optional<String> serialNumber) {
 			this.serialNumber = serialNumber;
 			return this;
 		}
 
-		public Builder imageFileName(String imageFileName) {
+		public Builder imageFileName(Optional<String> imageFileName) {
 			this.imageFileName = imageFileName;
 			return this;
 		}
@@ -80,7 +88,7 @@ public class ItemInfoAll330 {
 		}
 	}
 
-	@UShort
+	@XfsEnum16
 	private final Level level;
 
 	private final CurrencyId currencyId;
@@ -91,10 +99,10 @@ public class ItemInfoAll330 {
 	@UShort
 	private final int release;
 
-	@UnicodeString
-	private final String serialNumber;
+	@OptionalUnicode
+	private final Optional<String> serialNumber;
 
-	private final String imageFileName;
+	private final Optional<String> imageFileName;
 
 	@XfsEnum16
 	private final OnBlacklist onBlacklist;
@@ -133,11 +141,11 @@ public class ItemInfoAll330 {
 		return release;
 	}
 
-	public String getSerialNumber() {
+	public Optional<String> getSerialNumber() {
 		return serialNumber;
 	}
 
-	public String getImageFileName() {
+	public Optional<String> getImageFileName() {
 		return imageFileName;
 	}
 
@@ -153,19 +161,30 @@ public class ItemInfoAll330 {
 		return number;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof ItemInfoAll330) {
+		if (obj instanceof ItemInfoAll330) {
 			ItemInfoAll330 itemInfoAll = (ItemInfoAll330) obj;
-			return new EqualsBuilder().append(level, itemInfoAll.level).append(currencyId, itemInfoAll.currencyId).append(value, itemInfoAll.value).append(release, itemInfoAll.release).append(serialNumber, itemInfoAll.serialNumber).append(imageFileName, itemInfoAll.imageFileName).append(onBlacklist, itemInfoAll.onBlacklist).append(itemLocation, itemInfoAll.itemLocation).append(number, itemInfoAll.number).isEquals();
+			return new EqualsBuilder().append(level, itemInfoAll.level).append(currencyId, itemInfoAll.currencyId)
+					.append(value, itemInfoAll.value).append(release, itemInfoAll.release)
+					.append(serialNumber, itemInfoAll.serialNumber).append(imageFileName, itemInfoAll.imageFileName)
+					.append(onBlacklist, itemInfoAll.onBlacklist).append(itemLocation, itemInfoAll.itemLocation)
+					.append(number, itemInfoAll.number).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(level).append(currencyId).append(value).append(release).append(serialNumber).append(imageFileName).append(onBlacklist).append(itemLocation).append(number).toHashCode();
+		return new HashCodeBuilder().append(level).append(currencyId).append(value).append(release).append(serialNumber)
+				.append(imageFileName).append(onBlacklist).append(itemLocation).append(number).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("level", level).append("currencyId", currencyId).append("value", value).append("release", release).append("serialNumber", serialNumber).append("imageFileName", imageFileName).append("onBlacklist", onBlacklist).append("itemLocation", itemLocation).append("number", number).toString();
+		return new ToStringBuilder(this).append("level", level).append("currencyId", currencyId).append("value", value)
+				.append("release", release).append("serialNumber", serialNumber).append("imageFileName", imageFileName)
+				.append("onBlacklist", onBlacklist).append("itemLocation", itemLocation).append("number", number)
+				.toString();
 	}
 }

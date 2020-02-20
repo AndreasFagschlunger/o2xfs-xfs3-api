@@ -5,7 +5,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
+import at.o2xfs.memory.databind.annotation.Pointer;
+import at.o2xfs.xfs.cdm.IncompleteRetractReason;
+import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 import at.o2xfs.xfs.v3_20.cdm.ItemNumberList320;
 
 @MemoryPropertyOrder({ "itemNumberList", "reason" })
@@ -14,7 +16,7 @@ public class IncompleteRetract330 {
 	public static class Builder {
 
 		private ItemNumberList320 itemNumberList;
-		private int reason;
+		private IncompleteRetractReason reason;
 
 		public Builder() {
 		}
@@ -24,7 +26,7 @@ public class IncompleteRetract330 {
 			return this;
 		}
 
-		public Builder reason(int reason) {
+		public Builder reason(IncompleteRetractReason reason) {
 			this.reason = reason;
 			return this;
 		}
@@ -34,10 +36,11 @@ public class IncompleteRetract330 {
 		}
 	}
 
+	@Pointer
 	private final ItemNumberList320 itemNumberList;
 
-	@UShort
-	private final int reason;
+	@XfsEnum16
+	private final IncompleteRetractReason reason;
 
 	protected IncompleteRetract330(Builder builder) {
 		itemNumberList = builder.itemNumberList;
@@ -48,7 +51,7 @@ public class IncompleteRetract330 {
 		return itemNumberList;
 	}
 
-	public int getReason() {
+	public IncompleteRetractReason getReason() {
 		return reason;
 	}
 

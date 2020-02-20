@@ -1,6 +1,6 @@
 package at.o2xfs.xfs.v3_30.cdm;
 
-import at.o2xfs.memory.databind.annotation.win32.UnicodeString;
+import at.o2xfs.memory.databind.annotation.win32.Unicode;
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.ULong;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -39,7 +39,7 @@ public class BlacklistElement330 {
 		}
 	}
 
-	@UnicodeString
+	@Unicode
 	private final String serialNumber;
 
 	private final CurrencyId currencyId;

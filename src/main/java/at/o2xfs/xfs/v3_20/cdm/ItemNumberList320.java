@@ -1,29 +1,47 @@
 package at.o2xfs.xfs.v3_20.cdm;
 
-import at.o2xfs.xfs.v3_20.cdm.ItemNumber320;
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-@MemoryPropertyOrder({"numOfItemNumbers", "itemNumber" })
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+
+@MemoryPropertyOrder({ "numOfItemNumbers", "itemNumber" })
 public class ItemNumberList320 {
 
 	public static class Builder {
 
-		private int numOfItemNumbers;
-		private ItemNumber320 itemNumber;
+		private final List<ItemNumber320> itemNumbers;
 
-		public Builder() { }
+		public Builder() {
+			itemNumbers = new ArrayList<>();
+		}
 
-		public Builder numOfItemNumbers(int numOfItemNumbers) {
-			this.numOfItemNumbers = numOfItemNumbers;
+		public Builder addItemNumbers(ItemNumber320 element) {
+			this.itemNumbers.add(element);
 			return this;
 		}
 
-		public Builder itemNumber(ItemNumber320 itemNumber) {
-			this.itemNumber = itemNumber;
+		public Builder addItemNumbers(ItemNumber320... elements) {
+			for (ItemNumber320 each : elements) {
+				this.itemNumbers.add(each);
+			}
+			return this;
+		}
+
+		public Builder itemNumbers(Iterable<ItemNumber320> elements) {
+			this.itemNumbers.clear();
+			return addAllItemNumbers(elements);
+		}
+
+		public Builder addAllItemNumbers(Iterable<ItemNumber320> elements) {
+			for (ItemNumber320 each : elements) {
+				this.itemNumbers.add(each);
+			}
 			return this;
 		}
 
@@ -32,37 +50,32 @@ public class ItemNumberList320 {
 		}
 	}
 
-	@UShort
-	private final int numOfItemNumbers;
-
-	private final ItemNumber320 itemNumber;
+	private final List<ItemNumber320> itemNumbers;
 
 	protected ItemNumberList320(Builder builder) {
-		numOfItemNumbers = builder.numOfItemNumbers;
-		itemNumber = builder.itemNumber;
+		itemNumbers = Collections.unmodifiableList(new ArrayList<>(builder.itemNumbers));
 	}
 
-	public int getNumOfItemNumbers() {
-		return numOfItemNumbers;
+	public List<ItemNumber320> getItemNumbers() {
+		return itemNumbers;
 	}
 
-	public ItemNumber320 getItemNumber() {
-		return itemNumber;
-	}
-
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof ItemNumberList320) {
+		if (obj instanceof ItemNumberList320) {
 			ItemNumberList320 itemNumberList = (ItemNumberList320) obj;
-			return new EqualsBuilder().append(numOfItemNumbers, itemNumberList.numOfItemNumbers).append(itemNumber, itemNumberList.itemNumber).isEquals();
+			return new EqualsBuilder().append(itemNumbers, itemNumberList.itemNumbers).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(numOfItemNumbers).append(itemNumber).toHashCode();
+		return new HashCodeBuilder().append(itemNumbers).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("numOfItemNumbers", numOfItemNumbers).append("itemNumber", itemNumber).toString();
+		return new ToStringBuilder(this).append("itemNumbers", itemNumbers).toString();
 	}
 }

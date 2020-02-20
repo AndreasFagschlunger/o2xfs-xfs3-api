@@ -1,16 +1,18 @@
 package at.o2xfs.xfs.v3_30.cdm;
 
-import at.o2xfs.memory.databind.annotation.win32.UnicodeString;
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import at.o2xfs.memory.databind.annotation.win32.ULong;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import at.o2xfs.xfs.util.CurrencyId;
-import at.o2xfs.xfs.v3_30.cdm.Signature330;
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import java.util.Optional;
 
-@MemoryPropertyOrder({"currencyId", "value", "release", "serialNumber", "signature", "imageFileName" })
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.win32.OptionalUnicode;
+import at.o2xfs.memory.databind.annotation.win32.ULong;
+import at.o2xfs.memory.databind.annotation.win32.UShort;
+import at.o2xfs.xfs.util.CurrencyId;
+
+@MemoryPropertyOrder({ "currencyId", "value", "release", "serialNumber", "signature", "imageFileName" })
 public class ItemInfo330 {
 
 	public static class Builder {
@@ -18,11 +20,16 @@ public class ItemInfo330 {
 		private CurrencyId currencyId;
 		private long value;
 		private int release;
-		private String serialNumber;
-		private Signature330 signature;
-		private String imageFileName;
+		private Optional<String> serialNumber;
+		private Optional<Signature330> signature;
+		private Optional<String> imageFileName;
 
-		public Builder() { }
+		public Builder() {
+			currencyId = CurrencyId.empty();
+			serialNumber = Optional.empty();
+			signature = Optional.empty();
+			imageFileName = Optional.empty();
+		}
 
 		public Builder currencyId(CurrencyId currencyId) {
 			this.currencyId = currencyId;
@@ -39,17 +46,17 @@ public class ItemInfo330 {
 			return this;
 		}
 
-		public Builder serialNumber(String serialNumber) {
+		public Builder serialNumber(Optional<String> serialNumber) {
 			this.serialNumber = serialNumber;
 			return this;
 		}
 
-		public Builder signature(Signature330 signature) {
+		public Builder signature(Optional<Signature330> signature) {
 			this.signature = signature;
 			return this;
 		}
 
-		public Builder imageFileName(String imageFileName) {
+		public Builder imageFileName(Optional<String> imageFileName) {
 			this.imageFileName = imageFileName;
 			return this;
 		}
@@ -67,12 +74,12 @@ public class ItemInfo330 {
 	@UShort
 	private final int release;
 
-	@UnicodeString
-	private final String serialNumber;
+	@OptionalUnicode
+	private final Optional<String> serialNumber;
 
-	private final Signature330 signature;
+	private final Optional<Signature330> signature;
 
-	private final String imageFileName;
+	private final Optional<String> imageFileName;
 
 	protected ItemInfo330(Builder builder) {
 		currencyId = builder.currencyId;
@@ -95,31 +102,39 @@ public class ItemInfo330 {
 		return release;
 	}
 
-	public String getSerialNumber() {
+	public Optional<String> getSerialNumber() {
 		return serialNumber;
 	}
 
-	public Signature330 getSignature() {
+	public Optional<Signature330> getSignature() {
 		return signature;
 	}
 
-	public String getImageFileName() {
+	public Optional<String> getImageFileName() {
 		return imageFileName;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof ItemInfo330) {
+		if (obj instanceof ItemInfo330) {
 			ItemInfo330 itemInfo = (ItemInfo330) obj;
-			return new EqualsBuilder().append(currencyId, itemInfo.currencyId).append(value, itemInfo.value).append(release, itemInfo.release).append(serialNumber, itemInfo.serialNumber).append(signature, itemInfo.signature).append(imageFileName, itemInfo.imageFileName).isEquals();
+			return new EqualsBuilder().append(currencyId, itemInfo.currencyId).append(value, itemInfo.value)
+					.append(release, itemInfo.release).append(serialNumber, itemInfo.serialNumber)
+					.append(signature, itemInfo.signature).append(imageFileName, itemInfo.imageFileName).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(currencyId).append(value).append(release).append(serialNumber).append(signature).append(imageFileName).toHashCode();
+		return new HashCodeBuilder().append(currencyId).append(value).append(release).append(serialNumber)
+				.append(signature).append(imageFileName).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("currencyId", currencyId).append("value", value).append("release", release).append("serialNumber", serialNumber).append("signature", signature).append("imageFileName", imageFileName).toString();
+		return new ToStringBuilder(this).append("currencyId", currencyId).append("value", value)
+				.append("release", release).append("serialNumber", serialNumber).append("signature", signature)
+				.append("imageFileName", imageFileName).toString();
 	}
 }

@@ -1,13 +1,15 @@
 package at.o2xfs.xfs.v3_30.cdm;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import at.o2xfs.xfs.cdm.Level;
-import org.apache.commons.lang3.builder.EqualsBuilder;
+import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 
-@MemoryPropertyOrder({"level", "numOfItems" })
+@MemoryPropertyOrder({ "level", "numOfItems" })
 public class ItemInfoSummary330 {
 
 	public static class Builder {
@@ -15,7 +17,8 @@ public class ItemInfoSummary330 {
 		private Level level;
 		private int numOfItems;
 
-		public Builder() { }
+		public Builder() {
+		}
 
 		public Builder level(Level level) {
 			this.level = level;
@@ -32,7 +35,7 @@ public class ItemInfoSummary330 {
 		}
 	}
 
-	@UShort
+	@XfsEnum16
 	private final Level level;
 
 	@UShort
@@ -51,18 +54,22 @@ public class ItemInfoSummary330 {
 		return numOfItems;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof ItemInfoSummary330) {
+		if (obj instanceof ItemInfoSummary330) {
 			ItemInfoSummary330 itemInfoSummary = (ItemInfoSummary330) obj;
-			return new EqualsBuilder().append(level, itemInfoSummary.level).append(numOfItems, itemInfoSummary.numOfItems).isEquals();
+			return new EqualsBuilder().append(level, itemInfoSummary.level)
+					.append(numOfItems, itemInfoSummary.numOfItems).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
 		return new HashCodeBuilder().append(level).append(numOfItems).toHashCode();
 	}
 
+	@Override
 	public String toString() {
 		return new ToStringBuilder(this).append("level", level).append("numOfItems", numOfItems).toString();
 	}

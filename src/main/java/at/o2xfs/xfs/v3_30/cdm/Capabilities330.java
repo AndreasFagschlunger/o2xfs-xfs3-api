@@ -2,6 +2,7 @@ package at.o2xfs.xfs.v3_30.cdm;
 
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -10,6 +11,7 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.Pointer;
 import at.o2xfs.xfs.XfsServiceClass;
 import at.o2xfs.xfs.cdm.CdmExecuteCommand;
 import at.o2xfs.xfs.cdm.CdmType;
@@ -34,6 +36,7 @@ public class Capabilities330 extends Capabilities320 {
 		private Set<CdmExecuteCommand> synchronizableCommands;
 
 		public Builder() {
+			this.synchronizableCommands = new HashSet<>();
 		}
 
 		@Override
@@ -288,12 +291,12 @@ public class Capabilities330 extends Capabilities320 {
 			return this;
 		}
 
-		public Builder addItemInfoType(ItemInfoType element) {
+		public Builder addItemInfoTypes(ItemInfoType element) {
 			this.itemInfoTypes.add(element);
 			return this;
 		}
 
-		public Builder addItemInfoType(ItemInfoType... elements) {
+		public Builder addItemInfoTypes(ItemInfoType... elements) {
 			for (ItemInfoType each : elements) {
 				this.itemInfoTypes.add(each);
 			}
@@ -352,7 +355,8 @@ public class Capabilities330 extends Capabilities320 {
 
 	private final boolean blacklist;
 
-	@XfsEnumSet32
+	@Pointer
+	@XfsEnumSet32(zeroTerminated = true)
 	private final Set<CdmExecuteCommand> synchronizableCommands;
 
 	protected Capabilities330(Builder builder) {

@@ -1,28 +1,24 @@
 package at.o2xfs.xfs.v3_30.cdm;
 
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import java.util.List;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import at.o2xfs.xfs.v3_30.cdm.ItemInfoAll330;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import java.util.Collections;
-import org.apache.commons.lang3.builder.EqualsBuilder;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-@MemoryPropertyOrder({"count", "itemsList" })
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+
+@MemoryPropertyOrder({ "itemsList" })
 public class AllItemsInfo330 {
 
 	public static class Builder {
 
-		private int count;
-		private List<ItemInfoAll330> itemsList = new ArrayList<>();
+		private final List<ItemInfoAll330> itemsList;
 
-		public Builder() { }
-
-		public Builder count(int count) {
-			this.count = count;
-			return this;
+		public Builder() {
+			itemsList = new ArrayList<>();
 		}
 
 		public Builder addItemsList(ItemInfoAll330 element) {
@@ -31,7 +27,7 @@ public class AllItemsInfo330 {
 		}
 
 		public Builder addItemsList(ItemInfoAll330... elements) {
-			for(ItemInfoAll330 each : elements) {
+			for (ItemInfoAll330 each : elements) {
 				this.itemsList.add(each);
 			}
 			return this;
@@ -54,37 +50,32 @@ public class AllItemsInfo330 {
 		}
 	}
 
-	@UShort
-	private final int count;
-
 	private final List<ItemInfoAll330> itemsList;
 
 	protected AllItemsInfo330(Builder builder) {
-		count = builder.count;
 		itemsList = Collections.unmodifiableList(new ArrayList<>(builder.itemsList));
-	}
-
-	public int getCount() {
-		return count;
 	}
 
 	public List<ItemInfoAll330> getItemsList() {
 		return itemsList;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof AllItemsInfo330) {
+		if (obj instanceof AllItemsInfo330) {
 			AllItemsInfo330 allItemsInfo = (AllItemsInfo330) obj;
-			return new EqualsBuilder().append(count, allItemsInfo.count).append(itemsList, allItemsInfo.itemsList).isEquals();
+			return new EqualsBuilder().append(itemsList, allItemsInfo.itemsList).isEquals();
 		}
 		return false;
 	}
 
+	@Override
 	public int hashCode() {
-		return new HashCodeBuilder().append(count).append(itemsList).toHashCode();
+		return new HashCodeBuilder().append(itemsList).toHashCode();
 	}
 
+	@Override
 	public String toString() {
-		return new ToStringBuilder(this).append("count", count).append("itemsList", itemsList).toString();
+		return new ToStringBuilder(this).append("itemsList", itemsList).toString();
 	}
 }
