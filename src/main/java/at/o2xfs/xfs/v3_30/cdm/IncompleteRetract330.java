@@ -5,7 +5,6 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import at.o2xfs.memory.databind.annotation.Pointer;
 import at.o2xfs.xfs.cdm.IncompleteRetractReason;
 import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 import at.o2xfs.xfs.v3_20.cdm.ItemNumberList320;
@@ -36,7 +35,6 @@ public class IncompleteRetract330 {
 		}
 	}
 
-	@Pointer
 	private final ItemNumberList320 itemNumberList;
 
 	@XfsEnum16
