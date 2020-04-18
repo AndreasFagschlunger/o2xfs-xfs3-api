@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 
-@MemoryPropertyOrder({ "length", "data" })
+@MemoryPropertyOrder({ "data" })
 public class Signature330 {
 
 	public static class Builder {

@@ -11,7 +11,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
 
-@MemoryPropertyOrder({ "tellerId", "count", "cashUnits" })
+@MemoryPropertyOrder({ "tellerId", "cashUnits" })
 public class CashUnitInfo3 {
 
 	public static class Builder {
@@ -40,12 +40,12 @@ public class CashUnitInfo3 {
 			return this;
 		}
 
-		public Builder cashUnits(Iterable<CashUnit3> elements) {
+		public Builder cashUnits(Iterable<? extends CashUnit3> elements) {
 			this.cashUnits.clear();
 			return addAllCashUnits(elements);
 		}
 
-		public Builder addAllCashUnits(Iterable<CashUnit3> elements) {
+		public Builder addAllCashUnits(Iterable<? extends CashUnit3> elements) {
 			for (CashUnit3 each : elements) {
 				this.cashUnits.add(each);
 			}
@@ -60,7 +60,7 @@ public class CashUnitInfo3 {
 	@UShort
 	private final int tellerId;
 
-	private final List<CashUnit3> cashUnits;
+	private final List<? extends CashUnit3> cashUnits;
 
 	protected CashUnitInfo3(Builder builder) {
 		tellerId = builder.tellerId;
@@ -71,7 +71,7 @@ public class CashUnitInfo3 {
 		return tellerId;
 	}
 
-	public List<CashUnit3> getCashUnits() {
+	public List<? extends CashUnit3> getCashUnits() {
 		return cashUnits;
 	}
 

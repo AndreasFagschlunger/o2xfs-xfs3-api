@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.UShortArray;
 
-@MemoryPropertyOrder({ "count", "cashUnitNumbers" })
+@MemoryPropertyOrder({ "cashUnitNumbers" })
 public class CountsChanged3 {
 
 	public static class Builder {

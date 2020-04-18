@@ -15,7 +15,7 @@ public class Calibrate3 {
 
 		private int number;
 		private int numOfBills;
-		private Itemposition3 position;
+		private ItemPosition3 position;
 
 		public Builder() {
 		}
@@ -30,7 +30,7 @@ public class Calibrate3 {
 			return this;
 		}
 
-		public Builder position(Itemposition3 position) {
+		public Builder position(ItemPosition3 position) {
 			this.position = position;
 			return this;
 		}
@@ -47,7 +47,7 @@ public class Calibrate3 {
 	private final int numOfBills;
 
 	@Pointer(pointerToPointer = true)
-	private final Itemposition3 position;
+	private final ItemPosition3 position;
 
 	protected Calibrate3(Builder builder) {
 		number = builder.number;
@@ -63,7 +63,7 @@ public class Calibrate3 {
 		return numOfBills;
 	}
 
-	public Itemposition3 getPosition() {
+	public ItemPosition3 getPosition() {
 		return position;
 	}
 

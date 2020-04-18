@@ -12,7 +12,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.OptionalUnicode;
 
-@MemoryPropertyOrder({ "version", "count", "blacklistElements" })
+@MemoryPropertyOrder({ "version", "blacklistElements" })
 public class Blacklist330 {
 
 	public static class Builder {

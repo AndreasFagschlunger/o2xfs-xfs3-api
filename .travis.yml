@@ -26,7 +26,7 @@
 
 language: java
 jdk:
-  - openjdk8
+  - openjdk14
 install: ./gradlew --version
 script:
   - ./build.sh

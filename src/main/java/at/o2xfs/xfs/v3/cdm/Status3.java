@@ -59,24 +59,24 @@ public class Status3 {
 			return this;
 		}
 
-		public Builder addPosition(OutputPosition3 element) {
+		public <E extends OutputPosition3> Builder addPositions(E element) {
 			this.positions.add(element);
 			return this;
 		}
 
-		public Builder addPosition(OutputPosition3... elements) {
-			for (OutputPosition3 each : elements) {
+		public <E extends OutputPosition3> Builder addPositions(E... elements) {
+			for (E each : elements) {
 				this.positions.add(each);
 			}
 			return this;
 		}
 
-		public Builder positions(Iterable<OutputPosition3> elements) {
+		public Builder positions(Iterable<? extends OutputPosition3> elements) {
 			this.positions.clear();
 			return addAllPositions(elements);
 		}
 
-		public Builder addAllPositions(Iterable<OutputPosition3> elements) {
+		public Builder addAllPositions(Iterable<? extends OutputPosition3> elements) {
 			for (OutputPosition3 each : elements) {
 				this.positions.add(each);
 			}
@@ -149,7 +149,7 @@ public class Status3 {
 		return intermediateStacker;
 	}
 
-	public List<OutputPosition3> getPositions() {
+	public List<? extends OutputPosition3> getPositions() {
 		return positions;
 	}
 

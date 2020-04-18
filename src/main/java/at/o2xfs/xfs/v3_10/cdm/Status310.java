@@ -27,7 +27,7 @@ import at.o2xfs.xfs.v3.cdm.Status3;
 @MemoryPropertyOrder({ "guidLights", "devicePosition", "powerSaveRecoveryTime" })
 public class Status310 extends Status3 {
 
-	private static final int GUIDLIGHTS_MAX = 32;
+	protected static final int GUIDLIGHTS_MAX = 32;
 
 	public static class Builder extends Status3.Builder {
 
@@ -68,25 +68,25 @@ public class Status310 extends Status3 {
 		}
 
 		@Override
-		public Builder addPosition(OutputPosition3 element) {
-			super.addPosition(element);
+		public Builder addPositions(OutputPosition3 element) {
+			super.addPositions(element);
 			return this;
 		}
 
 		@Override
-		public Builder addPosition(OutputPosition3... elements) {
-			super.addPosition(elements);
+		public Builder addPositions(OutputPosition3... elements) {
+			super.addPositions(elements);
 			return this;
 		}
 
 		@Override
-		public Builder positions(Iterable<OutputPosition3> elements) {
+		public Builder positions(Iterable<? extends OutputPosition3> elements) {
 			super.positions(elements);
 			return this;
 		}
 
 		@Override
-		public Builder addAllPositions(Iterable<OutputPosition3> elements) {
+		public Builder addAllPositions(Iterable<? extends OutputPosition3> elements) {
 			super.addAllPositions(elements);
 			return this;
 		}

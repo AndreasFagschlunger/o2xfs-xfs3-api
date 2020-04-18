@@ -17,7 +17,7 @@ class Status3Test extends BaseTest {
 	public Object getValue() {
 		return new Status3.Builder().device(Device.ONLINE).safeDoor(SafeDoor.CLOSED).dispenser(Dispenser.OK)
 				.intermediateStacker(IntermediateStacker.EMPTY)
-				.addPosition(new OutputPosition3.Builder().position(Position.FRONT).shutter(Shutter.CLOSED)
+				.addPositions(new OutputPosition3.Builder().position(Position.FRONT).shutter(Shutter.CLOSED)
 						.positionStatus(PositionStatus.EMPTY).transport(Transport.OK)
 						.transportStatus(TransportStatus.EMPTY).build())
 				.putExtra("LASTERROR", "StClass=00000000,StCode=00000000").putExtra("LastErrorText", "OK:none").build();
