@@ -12,7 +12,7 @@ import at.o2xfs.xfs.cdm.Position;
 import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 
 @MemoryPropertyOrder({ "number", "retractArea", "outputPosition" })
-public class Itemposition3 {
+public class ItemPosition3 {
 
 	public static class Builder {
 
@@ -40,8 +40,8 @@ public class Itemposition3 {
 			return this;
 		}
 
-		public Itemposition3 build() {
-			return new Itemposition3(this);
+		public ItemPosition3 build() {
+			return new ItemPosition3(this);
 		}
 	}
 
@@ -53,7 +53,7 @@ public class Itemposition3 {
 	@XfsEnum16
 	private final Position outputPosition;
 
-	protected Itemposition3(Builder builder) {
+	protected ItemPosition3(Builder builder) {
 		number = builder.number;
 		retractArea = builder.retractArea;
 		outputPosition = builder.outputPosition;
@@ -73,8 +73,8 @@ public class Itemposition3 {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof Itemposition3) {
-			Itemposition3 itemposition = (Itemposition3) obj;
+		if (obj instanceof ItemPosition3) {
+			ItemPosition3 itemposition = (ItemPosition3) obj;
 			return new EqualsBuilder().append(number, itemposition.number).append(retractArea, itemposition.retractArea)
 					.append(outputPosition, itemposition.outputPosition).isEquals();
 		}

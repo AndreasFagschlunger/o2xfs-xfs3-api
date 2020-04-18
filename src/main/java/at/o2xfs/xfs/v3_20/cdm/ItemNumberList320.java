@@ -10,7 +10,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 
-@MemoryPropertyOrder({ "numOfItemNumbers", "itemNumber" })
+@MemoryPropertyOrder({ "itemNumbers" })
 public class ItemNumberList320 {
 
 	public static class Builder {

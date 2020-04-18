@@ -9,7 +9,7 @@ import at.o2xfs.memory.databind.annotation.win32.ULong;
 import at.o2xfs.memory.databind.annotation.win32.ULongArray;
 import at.o2xfs.xfs.util.CurrencyId;
 
-@MemoryPropertyOrder({ "currencyId", "amount", "count", "values", "cashBox" })
+@MemoryPropertyOrder({ "currencyId", "amount", "values", "cashBox" })
 public class Denomination3 {
 
 	public static class Builder {

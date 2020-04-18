@@ -2,7 +2,7 @@ package at.o2xfs.xfs.v3_10.cdm;
 
 import java.util.EnumSet;
 
-import at.o2xfs.xfs.XfsServiceClass;
+import at.o2xfs.xfs.api.XfsServiceClass;
 import at.o2xfs.xfs.cdm.CdmType;
 import at.o2xfs.xfs.cdm.ExchangeType;
 import at.o2xfs.xfs.cdm.GuidLight;

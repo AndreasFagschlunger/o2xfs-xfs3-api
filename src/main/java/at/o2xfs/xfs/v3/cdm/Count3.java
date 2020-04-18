@@ -10,7 +10,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 
-@MemoryPropertyOrder({ "numPhysicalCUs", "countedPhysicalCashUnits" })
+@MemoryPropertyOrder({ "countedPhysicalCashUnits" })
 public class Count3 {
 
 	public static class Builder {

@@ -55,25 +55,25 @@ public class Status320 extends Status310 {
 		}
 
 		@Override
-		public Builder addPosition(OutputPosition3 element) {
-			super.addPosition(element);
+		public Builder addPositions(OutputPosition3 element) {
+			super.addPositions(element);
 			return this;
 		}
 
 		@Override
-		public Builder addPosition(OutputPosition3... elements) {
-			super.addPosition(elements);
+		public Builder addPositions(OutputPosition3... elements) {
+			super.addPositions(elements);
 			return this;
 		}
 
 		@Override
-		public Builder positions(Iterable<OutputPosition3> elements) {
+		public Builder positions(Iterable<? extends OutputPosition3> elements) {
 			super.positions(elements);
 			return this;
 		}
 
 		@Override
-		public Builder addAllPositions(Iterable<OutputPosition3> elements) {
+		public Builder addAllPositions(Iterable<? extends OutputPosition3> elements) {
 			super.addAllPositions(elements);
 			return this;
 		}
