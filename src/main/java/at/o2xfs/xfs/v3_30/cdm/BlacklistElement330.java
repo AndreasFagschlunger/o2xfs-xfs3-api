@@ -1,16 +1,22 @@
 package at.o2xfs.xfs.v3_30.cdm;
 
-import at.o2xfs.memory.databind.annotation.win32.Unicode;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.ULong;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import at.o2xfs.memory.databind.annotation.win32.Unicode;
 import at.o2xfs.xfs.util.CurrencyId;
-import org.apache.commons.lang3.builder.EqualsBuilder;
 
+@JsonDeserialize(builder = BlacklistElement330.Builder.class)
 @MemoryPropertyOrder({"serialNumber", "currencyId", "value" })
 public class BlacklistElement330 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private String serialNumber;

@@ -7,6 +7,10 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.ULong;
 import at.o2xfs.xfs.cdm.Status;
@@ -15,9 +19,11 @@ import at.o2xfs.xfs.util.CurrencyId;
 import at.o2xfs.xfs.util.UnitId;
 import at.o2xfs.xfs.v3.cdm.CashUnit3;
 
+@JsonDeserialize(builder = CashUnit310.Builder.class)
 @MemoryPropertyOrder({ "dispensedCount", "presentedCount", "retractedCount" })
 public class CashUnit310 extends CashUnit3 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 		private int number;
 		private Type type;
@@ -113,6 +119,7 @@ public class CashUnit310 extends CashUnit3 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addPhysicalCashUnits(PhysicalCashUnit310... elements) {
 			for (PhysicalCashUnit310 each : elements) {
 				this.physicalCashUnits.add(each);

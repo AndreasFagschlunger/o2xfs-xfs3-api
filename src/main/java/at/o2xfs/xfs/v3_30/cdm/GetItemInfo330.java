@@ -8,6 +8,10 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
 import at.o2xfs.xfs.cdm.ItemInfoType;
@@ -15,9 +19,11 @@ import at.o2xfs.xfs.cdm.Level;
 import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 import at.o2xfs.xfs.databind.annotation.XfsEnumSet32;
 
+@JsonDeserialize(builder = GetItemInfo330.Builder.class)
 @MemoryPropertyOrder({ "level", "index", "itemInfoType" })
 public class GetItemInfo330 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private Level level;
@@ -42,6 +48,7 @@ public class GetItemInfo330 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addItemInfoType(ItemInfoType... elements) {
 			for (ItemInfoType each : elements) {
 				this.itemInfoType.add(each);

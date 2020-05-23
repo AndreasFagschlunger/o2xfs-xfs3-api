@@ -4,14 +4,19 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.ULong;
 import at.o2xfs.memory.databind.annotation.win32.ULongArray;
 import at.o2xfs.xfs.util.CurrencyId;
 
+@JsonDeserialize(builder = Denomination3.Builder.class)
 @MemoryPropertyOrder({ "currencyId", "amount", "values", "cashBox" })
 public class Denomination3 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private CurrencyId currencyId;

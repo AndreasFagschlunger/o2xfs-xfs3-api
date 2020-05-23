@@ -4,8 +4,13 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
+@JsonDeserialize(builder = MixRow3.Builder.class)
 public class MixRow3 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private long amount;

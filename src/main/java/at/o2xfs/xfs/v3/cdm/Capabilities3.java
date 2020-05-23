@@ -10,6 +10,10 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
 import at.o2xfs.xfs.api.XfsServiceClass;
@@ -24,11 +28,13 @@ import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 import at.o2xfs.xfs.databind.annotation.XfsEnumSet16;
 import at.o2xfs.xfs.databind.annotation.XfsExtra;
 
+@JsonDeserialize(builder = Capabilities3.Builder.class)
 @MemoryPropertyOrder({ "serviceClass", "type", "maxDispenseItems", "compound", "shutter", "shutterControl",
 		"retractAreas", "retractTransportActions", "retractStackerActions", "safeDoor", "cashBox",
 		"intermediateStacker", "itemsTakenSensor", "positions", "moveItems", "exchangeType", "extra" })
 public class Capabilities3 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private XfsServiceClass serviceClass;
@@ -88,6 +94,7 @@ public class Capabilities3 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addRetractArea(RetractArea... elements) {
 			for (RetractArea each : elements) {
 				this.retractAreas.add(each);
@@ -112,6 +119,7 @@ public class Capabilities3 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addRetractTransportAction(RetractTransportAction... elements) {
 			for (RetractTransportAction each : elements) {
 				this.retractTransportActions.add(each);
@@ -136,6 +144,7 @@ public class Capabilities3 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addRetractStackerAction(RetractStackerAction... elements) {
 			for (RetractStackerAction each : elements) {
 				this.retractStackerActions.add(each);
@@ -180,6 +189,7 @@ public class Capabilities3 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addPosition(Position... elements) {
 			for (Position each : elements) {
 				this.positions.add(each);
@@ -204,6 +214,7 @@ public class Capabilities3 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addMoveItem(MoveItem... elements) {
 			for (MoveItem each : elements) {
 				this.moveItems.add(each);
@@ -228,6 +239,7 @@ public class Capabilities3 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addExchangeType(ExchangeType... elements) {
 			for (ExchangeType each : elements) {
 				this.exchangeType.add(each);

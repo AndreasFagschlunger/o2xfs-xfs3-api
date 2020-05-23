@@ -4,12 +4,17 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.UShortArray;
 
+@JsonDeserialize(builder = CountsChanged3.Builder.class)
 @MemoryPropertyOrder({ "cashUnitNumbers" })
 public class CountsChanged3 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private int[] cashUnitNumbers;

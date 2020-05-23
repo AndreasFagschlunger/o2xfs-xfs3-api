@@ -8,11 +8,17 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 
+@JsonDeserialize(builder = AllItemsInfo330.Builder.class)
 @MemoryPropertyOrder({ "itemsList" })
 public class AllItemsInfo330 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private final List<ItemInfoAll330> itemsList;
@@ -26,6 +32,7 @@ public class AllItemsInfo330 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addItemsList(ItemInfoAll330... elements) {
 			for (ItemInfoAll330 each : elements) {
 				this.itemsList.add(each);

@@ -6,14 +6,19 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
 import at.o2xfs.xfs.cdm.Position;
 import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 
+@JsonDeserialize(builder = ItemPosition3.Builder.class)
 @MemoryPropertyOrder({ "number", "retractArea", "outputPosition" })
 public class ItemPosition3 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private int number;

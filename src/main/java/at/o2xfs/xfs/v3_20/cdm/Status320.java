@@ -7,6 +7,9 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.xfs.cdm.AntiFraudModule;
 import at.o2xfs.xfs.cdm.Device;
@@ -19,6 +22,7 @@ import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 import at.o2xfs.xfs.v3.cdm.OutputPosition3;
 import at.o2xfs.xfs.v3_10.cdm.Status310;
 
+@JsonDeserialize(builder = Status320.Builder.class)
 @MemoryPropertyOrder({ "antiFraudModule" })
 public class Status320 extends Status310 {
 
@@ -60,6 +64,7 @@ public class Status320 extends Status310 {
 			return this;
 		}
 
+		@JsonProperty
 		@Override
 		public Builder addPositions(OutputPosition3... elements) {
 			super.addPositions(elements);

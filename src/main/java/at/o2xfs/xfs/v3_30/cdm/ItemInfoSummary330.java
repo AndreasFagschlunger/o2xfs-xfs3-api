@@ -4,14 +4,19 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
 import at.o2xfs.xfs.cdm.Level;
 import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 
+@JsonDeserialize(builder = ItemInfoSummary330.Builder.class)
 @MemoryPropertyOrder({ "level", "numOfItems" })
 public class ItemInfoSummary330 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private Level level;

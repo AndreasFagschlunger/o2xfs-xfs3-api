@@ -1,15 +1,21 @@
 package at.o2xfs.xfs.v3.cdm;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 import at.o2xfs.xfs.util.CurrencyId;
-import org.apache.commons.lang3.builder.EqualsBuilder;
 
+@JsonDeserialize(builder = TellerInfo3.Builder.class)
 @MemoryPropertyOrder({"tellerId", "currencyId" })
 public class TellerInfo3 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private int tellerId;

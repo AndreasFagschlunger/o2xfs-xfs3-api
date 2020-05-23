@@ -7,15 +7,21 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryDeserialize;
 import at.o2xfs.memory.databind.annotation.MemorySerialize;
 import at.o2xfs.xfs.v3.cdm.databind.MixTable3MemoryDeserializer;
 import at.o2xfs.xfs.v3.cdm.databind.MixTable3MemorySerializer;
 
+@JsonDeserialize(builder = MixTable3.Builder.class)
 @MemorySerialize(using = MixTable3MemorySerializer.class)
 @MemoryDeserialize(using = MixTable3MemoryDeserializer.class)
 public class MixTable3 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private int mixNumber;
@@ -48,6 +54,7 @@ public class MixTable3 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addMixRows(MixRow3... elements) {
 			for (MixRow3 each : elements) {
 				this.mixRows.add(each);

@@ -4,6 +4,9 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.xfs.cdm.JammedShutterPosition;
 import at.o2xfs.xfs.cdm.Position;
@@ -14,9 +17,11 @@ import at.o2xfs.xfs.cdm.TransportStatus;
 import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 import at.o2xfs.xfs.v3.cdm.OutputPosition3;
 
+@JsonDeserialize(builder = OutputPosition330.Builder.class)
 @MemoryPropertyOrder({ "jammedShutterPosition" })
 public class OutputPosition330 extends OutputPosition3 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder extends OutputPosition3.Builder {
 
 		private JammedShutterPosition jammedShutterPosition;

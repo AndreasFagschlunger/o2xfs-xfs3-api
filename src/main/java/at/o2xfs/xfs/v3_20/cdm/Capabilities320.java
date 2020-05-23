@@ -7,6 +7,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.xfs.api.XfsServiceClass;
 import at.o2xfs.xfs.cdm.CdmType;
@@ -19,6 +21,7 @@ import at.o2xfs.xfs.cdm.RetractStackerAction;
 import at.o2xfs.xfs.cdm.RetractTransportAction;
 import at.o2xfs.xfs.v3_10.cdm.Capabilities310;
 
+@JsonDeserialize(builder = Capabilities320.Builder.class)
 @MemoryPropertyOrder({ "antiFraudModule" })
 public class Capabilities320 extends Capabilities310 {
 

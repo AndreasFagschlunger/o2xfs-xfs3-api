@@ -11,6 +11,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
 import at.o2xfs.xfs.cdm.Device;
@@ -24,6 +26,7 @@ import at.o2xfs.xfs.databind.annotation.XfsGuidLights;
 import at.o2xfs.xfs.v3.cdm.OutputPosition3;
 import at.o2xfs.xfs.v3.cdm.Status3;
 
+@JsonDeserialize(builder = Status310.Builder.class)
 @MemoryPropertyOrder({ "guidLights", "devicePosition", "powerSaveRecoveryTime" })
 public class Status310 extends Status3 {
 

@@ -8,6 +8,10 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.NullTerminated;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
@@ -16,9 +20,11 @@ import at.o2xfs.xfs.cdm.OutputPosition;
 import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 import at.o2xfs.xfs.databind.annotation.XfsEnum32;
 
+@JsonDeserialize(builder = TellerDetails3.Builder.class)
 @MemoryPropertyOrder({ "tellerId", "inputPosition", "outputPosition", "tellerTotals" })
 public class TellerDetails3 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private int tellerId;
@@ -49,6 +55,7 @@ public class TellerDetails3 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addTellerTotal(TellerTotals3... elements) {
 			for (TellerTotals3 each : elements) {
 				this.tellerTotals.add(each);
