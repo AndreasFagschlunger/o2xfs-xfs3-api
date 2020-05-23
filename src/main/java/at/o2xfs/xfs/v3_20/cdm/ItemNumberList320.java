@@ -8,11 +8,17 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 
+@JsonDeserialize(builder = ItemNumberList320.Builder.class)
 @MemoryPropertyOrder({ "itemNumbers" })
 public class ItemNumberList320 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private final List<ItemNumber320> itemNumbers;
@@ -26,6 +32,7 @@ public class ItemNumberList320 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addItemNumbers(ItemNumber320... elements) {
 			for (ItemNumber320 each : elements) {
 				this.itemNumbers.add(each);

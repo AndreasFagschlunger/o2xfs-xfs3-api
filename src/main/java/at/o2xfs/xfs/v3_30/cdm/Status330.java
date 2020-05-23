@@ -10,6 +10,10 @@ import java.util.Set;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.xfs.cdm.AntiFraudModule;
 import at.o2xfs.xfs.cdm.Device;
 import at.o2xfs.xfs.cdm.DevicePosition;
@@ -19,8 +23,10 @@ import at.o2xfs.xfs.cdm.IntermediateStacker;
 import at.o2xfs.xfs.cdm.SafeDoor;
 import at.o2xfs.xfs.v3_20.cdm.Status320;
 
+@JsonDeserialize(builder = Status330.Builder.class)
 public class Status330 extends Status320 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private Device device;
@@ -73,6 +79,7 @@ public class Status330 extends Status320 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addPositions(OutputPosition330... elements) {
 			for (OutputPosition330 each : elements) {
 				this.positions.add(each);

@@ -9,12 +9,18 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.OptionalUnicode;
 
+@JsonDeserialize(builder = Blacklist330.Builder.class)
 @MemoryPropertyOrder({ "version", "blacklistElements" })
 public class Blacklist330 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private Optional<String> version;
@@ -35,6 +41,7 @@ public class Blacklist330 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addBlacklistElements(BlacklistElement330... elements) {
 			for (BlacklistElement330 each : elements) {
 				this.blacklistElements.add(each);

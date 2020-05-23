@@ -10,6 +10,9 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.Pointer;
 import at.o2xfs.xfs.api.XfsServiceClass;
@@ -26,6 +29,7 @@ import at.o2xfs.xfs.cdm.RetractTransportAction;
 import at.o2xfs.xfs.databind.annotation.XfsEnumSet32;
 import at.o2xfs.xfs.v3_20.cdm.Capabilities320;
 
+@JsonDeserialize(builder = Capabilities330.Builder.class)
 @MemoryPropertyOrder({ "itemInfoTypes", "blacklist", "synchronizableCommands" })
 public class Capabilities330 extends Capabilities320 {
 
@@ -296,6 +300,7 @@ public class Capabilities330 extends Capabilities320 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addItemInfoTypes(ItemInfoType... elements) {
 			for (ItemInfoType each : elements) {
 				this.itemInfoTypes.add(each);
@@ -325,6 +330,7 @@ public class Capabilities330 extends Capabilities320 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addSynchronizableCommands(CdmExecuteCommand... synchronizableCommands) {
 			for (CdmExecuteCommand each : synchronizableCommands) {
 				this.synchronizableCommands.add(each);

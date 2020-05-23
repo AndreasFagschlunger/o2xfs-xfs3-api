@@ -10,6 +10,10 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.NullTerminated;
 import at.o2xfs.xfs.cdm.Device;
@@ -19,9 +23,11 @@ import at.o2xfs.xfs.cdm.SafeDoor;
 import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 import at.o2xfs.xfs.databind.annotation.XfsExtra;
 
+@JsonDeserialize(builder = Status3.Builder.class)
 @MemoryPropertyOrder({ "device", "safeDoor", "dispenser", "intermediateStacker", "positions", "extra" })
 public class Status3 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private Device device;
@@ -64,6 +70,7 @@ public class Status3 {
 			return this;
 		}
 
+		@JsonProperty
 		public <E extends OutputPosition3> Builder addPositions(E... elements) {
 			for (E each : elements) {
 				this.positions.add(each);

@@ -1,16 +1,22 @@
 package at.o2xfs.xfs.v3_20.cdm;
 
-import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
-import at.o2xfs.memory.databind.annotation.win32.UShort;
-import at.o2xfs.memory.databind.annotation.win32.ULong;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import at.o2xfs.xfs.util.CurrencyId;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
+import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
+import at.o2xfs.memory.databind.annotation.win32.ULong;
+import at.o2xfs.memory.databind.annotation.win32.UShort;
+import at.o2xfs.xfs.util.CurrencyId;
+
+@JsonDeserialize(builder = ItemNumber320.Builder.class)
 @MemoryPropertyOrder({"currencyId", "values", "release", "count", "number" })
 public class ItemNumber320 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private CurrencyId currencyId;

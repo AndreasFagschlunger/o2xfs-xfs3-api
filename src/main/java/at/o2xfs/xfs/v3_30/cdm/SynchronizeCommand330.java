@@ -4,13 +4,18 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.Pointer;
 import at.o2xfs.memory.databind.annotation.win32.ULong;
 
+@JsonDeserialize(builder = SynchronizeCommand330.Builder.class)
 @MemoryPropertyOrder({ "command", "cmdData" })
 public class SynchronizeCommand330 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private long command;

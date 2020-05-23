@@ -8,14 +8,20 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.memory.databind.annotation.win32.UShort;
 import at.o2xfs.xfs.cdm.GuidLight;
 import at.o2xfs.xfs.databind.annotation.XfsEnumSet32;
 
+@JsonDeserialize(builder = SetGuidlight310.Builder.class)
 @MemoryPropertyOrder({ "guidLight", "command" })
 public class SetGuidlight310 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private int guidLight;
@@ -34,6 +40,7 @@ public class SetGuidlight310 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addCommand(GuidLight... elements) {
 			for (GuidLight each : elements) {
 				this.command.add(each);

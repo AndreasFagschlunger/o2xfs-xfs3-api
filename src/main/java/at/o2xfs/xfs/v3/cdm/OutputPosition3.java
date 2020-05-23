@@ -4,6 +4,9 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.xfs.cdm.Position;
 import at.o2xfs.xfs.cdm.PositionStatus;
@@ -12,9 +15,11 @@ import at.o2xfs.xfs.cdm.Transport;
 import at.o2xfs.xfs.cdm.TransportStatus;
 import at.o2xfs.xfs.databind.annotation.XfsEnum16;
 
+@JsonDeserialize(builder = OutputPosition3.Builder.class)
 @MemoryPropertyOrder({ "position", "shutter", "positionStatus", "transport", "transportStatus" })
 public class OutputPosition3 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private Position position;

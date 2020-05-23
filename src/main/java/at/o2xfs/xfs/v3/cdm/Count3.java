@@ -8,11 +8,17 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 
+@JsonDeserialize(builder = Count3.Builder.class)
 @MemoryPropertyOrder({ "countedPhysicalCashUnits" })
 public class Count3 {
 
+	@JsonPOJOBuilder(withPrefix = "")
 	public static class Builder {
 
 		private final List<CountedPhysicalCashUnit3> countedPhysicalCashUnits = new ArrayList<>();
@@ -25,6 +31,7 @@ public class Count3 {
 			return this;
 		}
 
+		@JsonProperty
 		public Builder addCountedPhysicalCashUnits(CountedPhysicalCashUnit3... elements) {
 			for (CountedPhysicalCashUnit3 each : elements) {
 				this.countedPhysicalCashUnits.add(each);

@@ -11,6 +11,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+
 import at.o2xfs.memory.databind.annotation.MemoryPropertyOrder;
 import at.o2xfs.xfs.api.XfsServiceClass;
 import at.o2xfs.xfs.cdm.CdmType;
@@ -24,6 +26,7 @@ import at.o2xfs.xfs.cdm.RetractTransportAction;
 import at.o2xfs.xfs.databind.annotation.XfsGuidLights;
 import at.o2xfs.xfs.v3.cdm.Capabilities3;
 
+@JsonDeserialize(builder = Capabilities310.Builder.class)
 @MemoryPropertyOrder({ "guidLights", "powerSaveControl", "prepareDispense" })
 public class Capabilities310 extends Capabilities3 {
 
